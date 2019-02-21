@@ -35,7 +35,12 @@ public class Election extends Poll{
     }
 
     public static Election getNewElection(String title, String[] options){
-        throw new UnsupportedOperationException();
+        if (title != null && options != null){
+            if (!title.isEmpty() && options.length > 0 && !options[0].isEmpty()) {
+                return new Election(title, options);
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     public HashMap<String, Integer> getResults(){
