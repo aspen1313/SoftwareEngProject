@@ -8,22 +8,45 @@ import java.util.HashMap;
  * opinions of a group on a given topic.
  */
 public class Election extends Poll{
+    public int id;
     private boolean isOpen;
     public String title;
-    public String[] options;
-    public int[] votes;
-    public int id;
+    public Question[] questions;
     public Date startDate;
     public Date endDate;
 
-    private Election(String title, String[] options){
+    private Election(String title, Question[] questions){
         isOpen = true;
         this.title = title;
-        this.options = options;
+        this.questions = questions;
     }
 
-    public void vote(int voteIndex){
-        throw new UnsupportedOperationException();
+    private Election(String title, Question question){
+        this.title = title;
+        questions = new Question[]{question};
+    }
+
+    public static Election getNewElection(String title, Question[] questions){
+        if (title != null && questions != null){
+            if (!title.isEmpty() && questions.length > 0) {
+                return new Election(title, questions);
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public static Election getNewElection(String title, Question question){
+        if (title != null && question != null){
+            if (!title.isEmpty()) {
+                return new Election(title, question);
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    @Override
+    public void vote(String question, String option) {
+
     }
 
     public void close(){
@@ -32,15 +55,6 @@ public class Election extends Poll{
 
     public void open(){
         throw new UnsupportedOperationException();
-    }
-
-    public static Election getNewElection(String title, String[] options){
-        if (title != null && options != null){
-            if (!title.isEmpty() && options.length > 0 && !options[0].isEmpty()) {
-                return new Election(title, options);
-            }
-        }
-        throw new IllegalArgumentException();
     }
 
     public HashMap<String, Integer> getResults(){

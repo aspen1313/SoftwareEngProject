@@ -1,6 +1,7 @@
 package com.example.project;
 
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * This abstract class serves as the definition for our poll / election class.
@@ -11,13 +12,12 @@ import java.util.Date;
  * as input.
  */
 public abstract class Poll {
-    public String[] options;
-    public int[] votes;
     public int id;
+    public HashMap<String, HashMap<String, Integer>> votes;
     public Date startDate;
     public Date endDate;
 
-    public abstract void vote(int voteIndex);
+    public abstract void vote(String question, String option);
 
     public abstract void close();
 

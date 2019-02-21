@@ -5,38 +5,40 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import static org.junit.Assert.*;
-import java.util.HashMap;
 
 public class ElectionTests {
     Election election;
+
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
     @Test
     public void PollIsCreatedOnSensibleInputs(){
-        election = Election.getNewElection("Test Election",
-                new String[]{"Option 1", "Option 2"});
+        election = Election.getNewElection("Test Title 1",
+                Question.getNewQuestion("Test Question 1",
+                        new String[]{"Vote now"}));
         assertNotNull(election);
     }
 
     @Test
-    public void PollIsNotCreatedOnBadDates(){
-        exception.expect(IllegalArgumentException.class);
-        Election badElection = Election.getNewElection("", new String[]{});
-        assertNull(badElection);
+    public void ElectionWithMultipleQuestionsCanBeCreated(){
+        Election.getNewElection("Multi Question Election", new Question[]{
+                Question.getNewQuestion("Question 1", new String[]{"Vote now"}),
+                Question.getNewQuestion("Question 2", new String[]{"Vote now"})
+        });
     }
 
     @Test
-    public void VotesGetCountedProperly(){
-        election.vote(0);
-        election.vote(0);
-        election.vote(1);
+    public void PollIsNotCreatedWithNoTitle(){
+        exception.expect(IllegalArgumentException.class);
+        Election.getNewElection("", new Question[]{
+                Question.getNewQuestion("Test Question", new String[]{"Vote now"})});
+    }
 
-        HashMap<String, Integer> results = election.getResults();
-
-        assertNotNull(results);
-        assertEquals((int)results.get(election.options[0]), 2);
-        assertEquals((int)results.get(election.options[1]), 1);
+    @Test
+    public void PollIsNotCreateDWithNoQuestion(){
+        exception.expect(IllegalArgumentException.class);
+        Election.getNewElection("Title", new Question[0]);
     }
 
     // Tests both the close operation and the refusal. We want to split this up if we can.
@@ -45,13 +47,13 @@ public class ElectionTests {
         election.close();
 
         exception.expect(PollNotOpenException.class);
-        election.vote(0);
+        election.vote("Test Question 1", "Vote now");
     }
 
     @Test
     public void PollAllowsNewVotesWhenOpen(){
         election.open();
-        election.vote(0);
+        election.vote("Test Question 1", "Vote now");
     }
 
 }
