@@ -44,7 +44,7 @@ public class ElectionTests {
     // Tests both the close operation and the refusal. We want to split this up if we can.
     @Test
     public void PollRefusesNewVotesWhenClosed(){
-        election.close();
+        election.close("10-11-2018");
 
         exception.expect(PollNotOpenException.class);
         election.vote("Test Question 1", "Vote now");
@@ -52,7 +52,7 @@ public class ElectionTests {
 
     @Test
     public void PollAllowsNewVotesWhenOpen(){
-        election.open();
+        election.open("02-11-2016");
         election.vote("Test Question 1", "Vote now");
     }
 

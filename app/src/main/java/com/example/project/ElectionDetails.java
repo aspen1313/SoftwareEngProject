@@ -32,5 +32,16 @@ public class ElectionDetails extends AppCompatActivity {
         });
 
 
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String closeDate = findViewById(R.id.closeDateChange).toString();
+                e.close(closeDate);
+                System.out.println(closeDate);
+                Intent intent = new Intent(getApplicationContext(),ViewElections.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
