@@ -19,7 +19,7 @@ public abstract class Poll {
 
     public abstract void vote(String question, String option);
 
-    public abstract void close();
+    public abstract void close(String end);
 
-    public abstract void open();
+    public abstract void open(String open);
 }

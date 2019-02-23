@@ -6,27 +6,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class ViewElections extends AppCompatActivity {
 
-    private Button admin;
-    private Button student;
+    private Button viewDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_view_elections);
 
-        admin = findViewById(R.id.adminEntryButton);
-        student = findViewById(R.id.studentEntryButton);
+        viewDetails = findViewById(R.id.detailsButton);
 
-        admin.setOnClickListener(new View.OnClickListener() {
+        viewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminPage.class);
+                Intent intent = new Intent(getApplicationContext(), ElectionDetails.class);
                 startActivity(intent);
             }
         });
-
 
     }
 }

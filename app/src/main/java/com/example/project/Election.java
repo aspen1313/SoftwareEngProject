@@ -13,7 +13,13 @@ public class Election extends Poll{
     public String title;
     public Question[] questions;
     public Date startDate;
+    public String sDate;
     public Date endDate;
+    public String eDate;
+
+    public Election(){
+    }
+
 
     private Election(String title, Question[] questions){
         isOpen = true;
@@ -49,12 +55,13 @@ public class Election extends Poll{
 
     }
 
-    public void close(){
-        throw new UnsupportedOperationException();
+    public void close(String endDate){
+        eDate = endDate;
     }
 
-    public void open(){
-        throw new UnsupportedOperationException();
+    public void open(String openDate)
+    {
+       sDate = openDate;
     }
 
     public HashMap<String, Integer> getResults(){

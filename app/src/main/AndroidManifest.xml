@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateElectionActivity"></activity>
+        <activity android:name=".ElectionDetails"></activity>
+        <activity android:name=".ViewElections" />
+        <activity android:name=".AdminPage" />
+        <activity android:name=".CreateElectionActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
