@@ -27,11 +27,11 @@ public class CreateElectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView question = findViewById(R.id.editQuestion);
-                RadioButton choice1 = findViewById(R.id.choice1);
-                RadioButton choice2 = findViewById(R.id.choice2);
-                RadioButton choice3 = findViewById(R.id.choice3);
-                RadioButton choice4 = findViewById(R.id.choice4);
-                RadioButton choice5 = findViewById(R.id.choice5);
+                TextView choice1 = findViewById(R.id.choiceText1);
+                TextView choice2 = findViewById(R.id.choiceText2);
+                TextView choice3 = findViewById(R.id.choiceText3);
+                TextView choice4 = findViewById(R.id.choiceText4);
+                TextView choice5 = findViewById(R.id.choiceText5);
 
 
                 //TODO Create the Election Object and the the Question object
