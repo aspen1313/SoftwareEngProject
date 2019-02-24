@@ -1,6 +1,9 @@
 package com.example.project;
 
 import com.example.project.exceptions.PollNotOpenException;
+import com.example.project.models.Election;
+import com.example.project.models.Question;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
