@@ -50,10 +50,10 @@
         android:hint="Answer 1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
         app:layout_constraintTop_toBottomOf="@+id/QuestionView"
-        app:layout_constraintVertical_bias="0.003" />
+        app:layout_constraintVertical_bias="0.016" />
 
     <TextView
         android:id="@+id/ans2View"
@@ -121,8 +121,8 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="49dp"
-        android:layout_height="237dp"
+        android:layout_width="48dp"
+        android:layout_height="245dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
