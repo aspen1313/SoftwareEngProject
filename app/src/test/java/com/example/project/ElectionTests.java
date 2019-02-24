@@ -7,6 +7,10 @@ import com.example.project.models.Question;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class ElectionTests {
@@ -17,31 +21,41 @@ public class ElectionTests {
 
     @Test
     public void PollIsCreatedOnSensibleInputs(){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Vote now");
+
         election = Election.getNewElection("Test Title 1",
-                Question.getNewQuestion("Test Question 1",
-                        new String[]{"Vote now"}));
+                Question.getNewQuestion("Test Question 1", options));
         assertNotNull(election);
     }
 
     @Test
     public void ElectionWithMultipleQuestionsCanBeCreated(){
-        Election.getNewElection("Multi Question Election", new Question[]{
-                Question.getNewQuestion("Question 1", new String[]{"Vote now"}),
-                Question.getNewQuestion("Question 2", new String[]{"Vote now"})
-        });
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Vote now");
+
+        ArrayList<Question> questions = new ArrayList<>();
+        questions.add(Question.getNewQuestion("Question 1", options));
+        questions.add(Question.getNewQuestion("Question 2", options));
+
+        Election.getNewElection("Multi Question Election", questions);
     }
 
     @Test
     public void PollIsNotCreatedWithNoTitle(){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Vote now");
+        ArrayList<Question> questions = new ArrayList<>();
+        questions.add(Question.getNewQuestion("Test Question", options));
+
         exception.expect(IllegalArgumentException.class);
-        Election.getNewElection("", new Question[]{
-                Question.getNewQuestion("Test Question", new String[]{"Vote now"})});
+        Election.getNewElection("", questions);
     }
 
     @Test
     public void PollIsNotCreateDWithNoQuestion(){
         exception.expect(IllegalArgumentException.class);
-        Election.getNewElection("Title", new Question[0]);
+        Election.getNewElection("Title", new ArrayList<Question>());
     }
 
     // Tests both the close operation and the refusal. We want to split this up if we can.
