@@ -54,6 +54,8 @@ public class CreateElectionActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO we need to remove the election object from the list
+
                 Intent intent = new Intent(getApplicationContext(), AdminPage.class);
                 startActivity(intent);
             }
