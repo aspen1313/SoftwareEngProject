@@ -24,20 +24,20 @@
         <TextView
             android:id="@+id/electionNameView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="35dp"
+            android:hint="Election title" />
 
         <TextView
             android:id="@+id/startDateView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:hint="Start Date " />
 
         <TextView
             android:id="@+id/endDateView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:hint="Close Date" />
 
     </LinearLayout>
 

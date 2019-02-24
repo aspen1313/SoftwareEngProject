@@ -10,6 +10,7 @@ public class ElectionDetails extends AppCompatActivity {
 
     private Button open;
     private Button close;
+    private Button cancel;
 
     Election e = new Election();
     @Override
@@ -19,13 +20,13 @@ public class ElectionDetails extends AppCompatActivity {
 
         open = findViewById(R.id.changeOpenButton);
         close = findViewById(R.id.changeEndButton);
+        cancel = findViewById(R.id.cancelChangeButton);
 
         open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String openDate = findViewById(R.id.openDateChange).toString();
                 e.open(openDate);
-                System.out.println(openDate);
                 Intent intent = new Intent(getApplicationContext(),ViewElections.class);
                 startActivity(intent);
             }
@@ -37,11 +38,20 @@ public class ElectionDetails extends AppCompatActivity {
             public void onClick(View v) {
                 String closeDate = findViewById(R.id.closeDateChange).toString();
                 e.close(closeDate);
-                System.out.println(closeDate);
                 Intent intent = new Intent(getApplicationContext(),ViewElections.class);
                 startActivity(intent);
             }
         });
+
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ViewElections.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }
