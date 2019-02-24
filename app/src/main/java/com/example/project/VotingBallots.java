@@ -7,44 +7,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class CreateElectionActivity extends AppCompatActivity {
+public class VotingBallots extends AppCompatActivity {
 
     private Button next;
     private Button cancel;
     private Button done;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_election);
+        setContentView(R.layout.activity_voting_ballots);
 
-        next = findViewById(R.id.nextButton);
+        next = findViewById(R.id.nextQuesButton);
         cancel = findViewById(R.id.cancelButtonStudent);
-        done = findViewById(R.id.doneButton);
+        done = findViewById(R.id.doneVotingButton);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView question = findViewById(R.id.editQuestion);
-                TextView choice1 = findViewById(R.id.choiceText1);
-                TextView choice2 = findViewById(R.id.choiceText2);
-                TextView choice3 = findViewById(R.id.choiceText3);
-                TextView choice4 = findViewById(R.id.choiceText4);
-                TextView choice5 = findViewById(R.id.choiceText5);
-
 
                 //TODO Create the Election Object and the the Question object
                 // and extract the items from the UI to the objects.
 
-
-
-                question.setText(null);
-                choice1.setText(null);
-                choice2.setText(null);
-                choice3.setText(null);
-                choice4.setText(null);
-                choice5.setText(null);
-                Intent intent = new Intent(getApplicationContext(), CreateElectionActivity.class);
+                Intent intent = new Intent(getApplicationContext(), VotingBallots.class);
                 startActivity(intent);
             }
         });
@@ -55,7 +41,7 @@ public class CreateElectionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO we need to remove the election object from the list
 
-                Intent intent = new Intent(getApplicationContext(), AdminPage.class);
+                Intent intent = new Intent(getApplicationContext(), StudentPage.class);
                 startActivity(intent);
             }
         });
@@ -66,9 +52,11 @@ public class CreateElectionActivity extends AppCompatActivity {
 
                 // TODO submit the election to the firestore or whichever will hold everything.
 
-                Intent intent = new Intent(getApplicationContext(), AdminPage.class);
+                Intent intent = new Intent(getApplicationContext(), StudentPage.class);
                 startActivity(intent);
             }
         });
+
+
     }
 }
