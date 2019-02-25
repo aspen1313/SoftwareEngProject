@@ -35,18 +35,16 @@ public class Question implements Serializable {
     }
 
     /**
-     * Allows a question to be voted on using the index of the option that the user chose.
+     * Allows a question to be voted on using the index of the option that the user chose. Unimplemented.
      * @param voteIndex
-     * TODO Implement voting on questions
      */
     public void vote(int voteIndex){
         return;
     }
 
     /**
-     * Allows the results of a question to be retrieved.
+     * Allows the results of a question to be retrieved. Unimplemented.
      * @return
-     * TODO implement results retrieval for questions
      */
 
     public HashMap<String, Integer> getResults(){

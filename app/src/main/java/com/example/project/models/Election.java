@@ -26,8 +26,6 @@ public class Election extends Poll implements Serializable {
         eDate = e;
     }
 
-
-
     private Election(String title, ArrayList<Question> questions){
         isOpen = true;
         this.title = title;
@@ -74,10 +72,9 @@ public class Election extends Poll implements Serializable {
 
     /**
      * Allows a vote to be cast in an election using the title of the question
-     * and which option the user chose.
+     * and which option the user chose. Unimplemented.
      * @param question The question that the user is voting on
      * @param option The option that the user selected
-     * TODO implement voting on elections
      */
     @Override
     public void vote(String question, String option) {
@@ -85,9 +82,8 @@ public class Election extends Poll implements Serializable {
     }
 
     /**
-     * Allows the results of an entire election to be gathered.
+     * Allows the results of an entire election to be gathered. Unimplemented.
      * @return
-     * TODO implement results retrieval on elections.
      */
     public HashMap<String, HashMap<String, Integer>> getResults(){
         return null;
@@ -96,7 +92,6 @@ public class Election extends Poll implements Serializable {
     /**
      * Allows the election to be closed.
      * @param endDate
-     * TODO Implement closing of an election.
      */
     public void close(String endDate){
         eDate = endDate;
@@ -106,7 +101,6 @@ public class Election extends Poll implements Serializable {
     /**
      * Allows the election to be opened.
      * @param openDate
-     * TODO Implement opening of an election.
      */
     public void open(String openDate)
     {

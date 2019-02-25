@@ -26,10 +26,6 @@ public class VotingBallots extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //TODO Create the Election Object and the the Question object
-                // and extract the items from the UI to the objects.
-
                 Intent intent = new Intent(getApplicationContext(), VotingBallots.class);
                 startActivity(intent);
             }
@@ -39,8 +35,6 @@ public class VotingBallots extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO we need to remove the election object from the list
-
                 Intent intent = new Intent(getApplicationContext(), StudentPage.class);
                 startActivity(intent);
             }
@@ -49,9 +43,6 @@ public class VotingBallots extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // TODO submit the election to the firestore or whichever will hold everything.
-
                 Intent intent = new Intent(getApplicationContext(), StudentPage.class);
                 startActivity(intent);
             }

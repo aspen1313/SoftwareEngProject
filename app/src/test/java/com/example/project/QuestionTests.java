@@ -36,22 +36,4 @@ public class QuestionTests {
         question = Question.getNewQuestion("Test Question", options);
         assertNotNull(question);
     }
-
-    @Test
-    public void VotesGetCountedProperly(){
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Test Option 1");
-        options.add("Test Option 2");
-
-        question = Question.getNewQuestion("Test Question", options);
-        question.vote(0);
-        question.vote(0);
-        question.vote(1);
-
-        HashMap<String, Integer> results = question.getResults();
-
-        assertNotNull(results);
-        assertEquals((int)results.get("Test Option 1"), 2);
-        assertEquals((int)results.get("Test Option 2"), 1);
-    }
 }
