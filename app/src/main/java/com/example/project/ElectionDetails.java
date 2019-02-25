@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.project.models.Election;
 
@@ -14,7 +15,8 @@ public class ElectionDetails extends AppCompatActivity {
     private Button close;
     private Button cancel;
 
-    Election e = new Election();
+    Election e = new Election("2018-12-12", "2019-12-12");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,8 @@ public class ElectionDetails extends AppCompatActivity {
         open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String openDate = findViewById(R.id.openDateChange).toString();
+                TextView changeOpen = (TextView) findViewById(R.id.openDateChange);
+                String openDate = changeOpen.getText().toString();
                 e.open(openDate);
                 Intent intent = new Intent(getApplicationContext(),ViewElections.class);
                 startActivity(intent);
@@ -38,7 +41,8 @@ public class ElectionDetails extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String closeDate = findViewById(R.id.closeDateChange).toString();
+                TextView changeEnd = (TextView) findViewById(R.id.closeDateChange);
+                String closeDate = changeEnd.getText().toString();
                 e.close(closeDate);
                 Intent intent = new Intent(getApplicationContext(),ViewElections.class);
                 startActivity(intent);

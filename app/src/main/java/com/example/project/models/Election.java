@@ -21,9 +21,12 @@ public class Election extends Poll implements Serializable {
      * Deprecated as it was never supposed to be used. Remove all references to this constructor.
      */
     @Deprecated
-    public Election(){
-
+    public Election(String s, String e){
+        sDate = s;
+        eDate = e;
     }
+
+
 
     private Election(String title, ArrayList<Question> questions){
         isOpen = true;
@@ -97,6 +100,7 @@ public class Election extends Poll implements Serializable {
      */
     public void close(String endDate){
         eDate = endDate;
+
     }
 
     /**
@@ -107,6 +111,7 @@ public class Election extends Poll implements Serializable {
     public void open(String openDate)
     {
        sDate = openDate;
+
     }
 
 
