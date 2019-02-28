@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 /**
- * The Question class is used by the Election class to allow for multiple questions for a single
+ * The Question class is used by the Poll class to allow for multiple questions for a single
  * poll / election
  */
 public class Question implements Serializable {
@@ -44,7 +44,7 @@ public class Question implements Serializable {
     }
 
     /**
-     * Allows the results of a question to be retrieved. Unimplemented.
+     * Allows the results of a question to be retrieved.
      * @return
      */
 

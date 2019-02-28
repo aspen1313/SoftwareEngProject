@@ -1,14 +1,13 @@
 package com.example.project;
 
 import android.content.Intent;
-import android.provider.DocumentsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.project.models.Election;
+import com.example.project.models.Poll;
 import com.example.project.models.Question;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -63,11 +62,11 @@ public class CreateElectionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 collectDataIntoQuestion();
 
-                Election election = Election.getNewElection("Placeholder Title", questions);
+                Poll poll = Poll.getNewElection("Placeholder Title", questions);
 
                 DocumentReference docRef = database.collection("elections").document();
-                election.id = docRef.getId();
-                docRef.set(election);
+                poll.id = docRef.getId();
+                docRef.set(poll);
 
                 Intent intent = new Intent(getApplicationContext(), AdminPage.class);
                 startActivity(intent);
