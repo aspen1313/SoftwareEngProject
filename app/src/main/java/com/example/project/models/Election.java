@@ -87,7 +87,11 @@ public class Election extends Poll implements Serializable {
      */
     public HashMap<String, HashMap<String, Integer>> getResults(){
         HashMap<String, HashMap<String, Integer>> results = new HashMap<>();
-
+        Question q;
+        for(int i=0; i<questions.size(); i++){
+            q = questions.get(i);
+            results.put(q.title, q.getResults());
+        }
         return results;
     }
 

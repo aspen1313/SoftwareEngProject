@@ -50,7 +50,14 @@ public class Question implements Serializable {
 
     public HashMap<String, Integer> getResults(){
         HashMap<String, Integer> results = new HashMap<String, Integer>();
+        String option;
+        int voteCount;
+        for(int i=0; i<options.size(); i++){
+            option = options.get(i);
+            voteCount = votes.get(i);
 
+            results.put(option, voteCount);
+        }
         return results;
     }
 }
