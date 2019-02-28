@@ -2,10 +2,11 @@ package com.example.project.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
- * The Question class is used by the Election class to allow for multiple questions for a single
+ * The Question class is used by the Poll class to allow for multiple questions for a single
  * poll / election
  */
 public class Question implements Serializable {
@@ -16,7 +17,7 @@ public class Question implements Serializable {
     private Question(String title, ArrayList<String> options){
         this.title = title;
         this.options = options;
-        votes = new ArrayList<>(options.size());
+        votes = new ArrayList<>(Collections.nCopies(options.size(), 0));
     }
 
     /**
@@ -43,11 +44,20 @@ public class Question implements Serializable {
     }
 
     /**
-     * Allows the results of a question to be retrieved. Unimplemented.
+     * Allows the results of a question to be retrieved.
      * @return
      */
 
     public HashMap<String, Integer> getResults(){
-        return null;
+        HashMap<String, Integer> results = new HashMap<String, Integer>();
+        String option;
+        int voteCount;
+        for(int i=0; i<options.size(); i++){
+            option = options.get(i);
+            voteCount = votes.get(i);
+
+            results.put(option, voteCount);
+        }
+        return results;
     }
 }

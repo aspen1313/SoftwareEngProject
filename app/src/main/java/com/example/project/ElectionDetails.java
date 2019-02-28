@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.project.models.Election;
+import com.example.project.models.Poll;
 
 public class ElectionDetails extends AppCompatActivity {
 
@@ -15,7 +15,7 @@ public class ElectionDetails extends AppCompatActivity {
     private Button close;
     private Button cancel;
 
-    Election e = new Election("2018-12-12", "2019-12-12");
+    Poll e = new Poll("2018-12-12", "2019-12-12");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

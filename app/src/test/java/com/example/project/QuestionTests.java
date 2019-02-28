@@ -36,4 +36,18 @@ public class QuestionTests {
         question = Question.getNewQuestion("Test Question", options);
         assertNotNull(question);
     }
+
+    @Test
+    public void VotesCountedProperlyOnQuestion(){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Option 1");
+        options.add("Option 2");
+        Question question = Question.getNewQuestion("Question", options);
+
+        question.votes.set(0, 2);
+        question.votes.set(1, 9);
+
+        assertEquals((int)question.getResults().get("Option 1"), 2);
+        assertEquals((int)question.getResults().get("Option 2"), 9);
+    }
 }
