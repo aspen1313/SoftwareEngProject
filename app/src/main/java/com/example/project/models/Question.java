@@ -2,6 +2,7 @@ package com.example.project.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -16,7 +17,7 @@ public class Question implements Serializable {
     private Question(String title, ArrayList<String> options){
         this.title = title;
         this.options = options;
-        votes = new ArrayList<>(options.size());
+        votes = new ArrayList<>(Collections.nCopies(options.size(), 0));
     }
 
     /**
@@ -48,6 +49,8 @@ public class Question implements Serializable {
      */
 
     public HashMap<String, Integer> getResults(){
-        return null;
+        HashMap<String, Integer> results = new HashMap<String, Integer>();
+
+        return results;
     }
 }
