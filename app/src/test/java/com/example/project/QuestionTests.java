@@ -50,4 +50,34 @@ public class QuestionTests {
         assertEquals((int)question.getResults().get("Option 1"), 2);
         assertEquals((int)question.getResults().get("Option 2"), 9);
     }
+
+    @Test
+    public void AddVoteOption1(){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Option 1");
+        options.add("Option 2");
+        Question question = Question.getNewQuestion("Question", options);
+
+        question.votes.set(0, 2);
+        question.votes.set(1, 9);
+
+        question.vote(0);
+        assertEquals((int)question.getResults().get("Option 1"), 3);
+
+    }
+
+    @Test
+    public void AddVoteOption2(){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Option 1");
+        options.add("Option 2");
+        Question question = Question.getNewQuestion("Question", options);
+
+        question.votes.set(0, 2);
+        question.votes.set(1, 9);
+
+        question.vote(1);
+        assertEquals((int)question.getResults().get("Option 2"), 10);
+
+    }
 }
