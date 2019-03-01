@@ -47,7 +47,6 @@ public class Question implements Serializable {
      * Allows the results of a question to be retrieved.
      * @return
      */
-
     public HashMap<String, Integer> getResults(){
         HashMap<String, Integer> results = new HashMap<String, Integer>();
         String option;
