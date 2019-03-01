@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class VotingBallots extends AppCompatActivity {
@@ -52,20 +50,4 @@ public class VotingBallots extends AppCompatActivity {
 
 
     }
-     //requires methods for incrementing options, call Question.vote
-        public void onRadioButtonClicked(View view) {
-            // Is the button now checked?
-            boolean checked = ((RadioButton) view).isChecked();
-
-            switch(view.getId()) {
-                case R.id.radioButton1:
-                    if (checked)
-                        // vote(0_);
-                        break;
-                case R.id.radioButton2:
-                    if (checked)
-                        // vote(1);
-                        break;
-            }
-        }
 }
