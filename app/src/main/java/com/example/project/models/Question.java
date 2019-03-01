@@ -40,7 +40,7 @@ public class Question implements Serializable {
      * @param voteIndex
      */
     public static void vote(int voteIndex){
-
+        votes.set(voteIndex, votes.get(voteIndex)+1);
         return;
     }
 
