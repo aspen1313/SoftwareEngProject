@@ -13,6 +13,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import androidx.test.rule.ActivityTestRule;
+
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static org.junit.Assert.assertEquals;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -21,6 +23,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -73,11 +76,14 @@ public class EditQuestionUITests {
      */
     @Test
     public void SaveButtonShouldSaveObject(){
+        String title = "Save Title";
         rule.launchActivity(intent);
         onView(withId(R.id.addNewOptionButton)).perform(click());
         onView(withId(R.id.saveButton)).perform(click());
+        onView(withId(R.id.questionName)).perform(typeText(title));
         assertTrue(rule.getActivity() == null);
         assertEquals(question.options.size(), 3);
+        assertEquals(question.title, title);
     }
 
     /**
@@ -85,14 +91,17 @@ public class EditQuestionUITests {
      */
     @Test
     public void CancelButtonShouldNotSaveObject(){
+        String title = "Cancel Title";
         rule.launchActivity(intent);
         int numberOfElementsBefore = question.options.size();
 
         onView(withId(R.id.addNewOptionButton)).perform(click());
         onView(withId(R.id.cancelButton)).perform(click());
+        onView(withId(R.id.questionName)).perform(typeText(title));
 
         assertTrue(rule.getActivity() == null);
         assertEquals(question.options.size(), numberOfElementsBefore);
+        assertNotEquals(question.title, title);
     }
 
     @Test
