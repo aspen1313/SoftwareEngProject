@@ -1,4 +1,4 @@
-package com.example.project.views;
+package com.example.project.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +19,12 @@ public class EditQuestionActivity extends AppCompatActivity {
     private Button saveButton;
     private Button cancelButton;
     private Button addNewItemButton;
+    private Button removeItemButton;
+    private TextView questionName;
+
     private LinearLayout optionsView;
     private Intent intent;
     private Question question;
-    private TextView questionName;
 
     /**
      * Here we set our listeners to our event handlers, and get references to our UI elements.
@@ -37,9 +39,12 @@ public class EditQuestionActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButton);
         cancelButton = findViewById(R.id.cancelButton);
         addNewItemButton = findViewById(R.id.addNewOptionButton);
+        removeItemButton = findViewById(R.id.removeOptionButton);
+
         optionsView = findViewById(R.id.optionsView);
         intent = getIntent();
         question = (Question)intent.getSerializableExtra("question");
+
         populateUI();
 
         saveButton.setOnClickListener(new View.OnClickListener(){
@@ -63,7 +68,12 @@ public class EditQuestionActivity extends AppCompatActivity {
             }
         });
 
-
+        removeItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeItemButtonHandler();
+            }
+        });
     }
 
     /**
@@ -78,13 +88,29 @@ public class EditQuestionActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Saves the Question object and returns to previous activity.
+     */
     private void saveButtonHandler(){
         return;
     }
+
+    /**
+     * Returns to the previous activity without saving.
+     */
     private void cancelButtonHandler(){
         return;
     }
+
+    /**
+     * Add new EditText item to the layout.
+     */
     private void addNewItemButtonHandler(){
         return;
     }
+
+    /**
+     * Removes last item from the layout.
+     */
+    private void removeItemButtonHandler(){return;}
 }

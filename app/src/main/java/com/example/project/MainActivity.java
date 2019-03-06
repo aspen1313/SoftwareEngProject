@@ -6,15 +6,32 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.project.activities.EditQuestionActivity;
+import com.example.project.models.Question;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button admin;
     private Button student;
+    private boolean leemDebug = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(leemDebug){
+            ArrayList<String> options = new ArrayList<>();
+            options.add("Option 1");
+            options.add("Option 2");
+            Question question = Question.getNewQuestion("T I T L E", options);
+            Intent intent = new Intent(getApplicationContext(), EditQuestionActivity.class);
+            intent.putExtra("question", question);
+            startActivity(intent);
+        }
+
 
         admin = findViewById(R.id.adminEntryButton);
         student = findViewById(R.id.studentEntryButton);
