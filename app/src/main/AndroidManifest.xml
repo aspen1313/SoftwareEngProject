@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VotingBallots"></activity>
+        <activity android:name=".views.EditQuestionActivity"></activity>
+        <activity android:name=".VotingBallots" />
         <activity android:name=".StudentPage" />
         <activity android:name=".ElectionDetails" />
         <activity android:name=".ViewElections" />
