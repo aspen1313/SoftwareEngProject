@@ -70,7 +70,12 @@ public class EditQuestionActivity extends AppCompatActivity {
      * Populates the UI with the passed Question. One should always have been passed.
      */
     private void populateUI(){
-        return;
+        EditText text;
+        for(int i=0; i<question.options.size(); i++){
+            text = new EditText(this);
+            text.setText(question.options.get(i));
+            optionsView.addView(text);
+        }
     }
 
     private void saveButtonHandler(){
