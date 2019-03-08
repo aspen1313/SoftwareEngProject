@@ -7,10 +7,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class QuestionTests {
     Question question;
@@ -57,13 +58,11 @@ public class QuestionTests {
         options.add("Option 1");
         options.add("Option 2");
         Question question = Question.getNewQuestion("Question", options);
-
         question.votes.set(0, 2);
         question.votes.set(1, 9);
 
         question.vote(0);
         assertEquals((int)question.getResults().get("Option 1"), 3);
-
     }
 
     @Test
@@ -78,6 +77,29 @@ public class QuestionTests {
 
         question.vote(1);
         assertEquals((int)question.getResults().get("Option 2"), 10);
+    }
 
+    @Test
+    public void SettingQuestionDoesNotOverwriteExistingQuestion(){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Option 1");
+        options.add("Option 2");
+        Question question = Question.getNewQuestion("Question", options);
+        Question question2 = Question.getNewQuestion("Question2", options);
+
+        Question.setQuestionObject(question);
+        assertFalse(Question.setQuestionObject(question2));
+    }
+
+    @Test
+    public void QuestionObjectGetsNulledCorrectlyWhenGetIsCalled(){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Option 1");
+        options.add("Option 2");
+        Question question = Question.getNewQuestion("Question", options);
+        Question.setQuestionObject(question);
+        
+        assertNotNull(Question.getQuestionObject());
+        assertNull(Question.getQuestionObject());
     }
 }
