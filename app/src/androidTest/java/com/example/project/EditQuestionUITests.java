@@ -1,6 +1,5 @@
 package com.example.project;
 
-import android.app.Activity;
 import android.content.Intent;
 
 import com.example.project.models.Question;
@@ -14,6 +13,8 @@ import java.util.ArrayList;
 
 import androidx.test.rule.ActivityTestRule;
 
+import static androidx.test.espresso.action.ViewActions.clearText;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static org.junit.Assert.assertEquals;
 
@@ -24,8 +25,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Tests the UI for EditQuestionActivity
@@ -67,23 +66,26 @@ public class EditQuestionUITests {
      */
     @Test
     public void AddButtonShouldAddNewOption(){
+        rule.launchActivity(intent);
         onView(withId(R.id.addNewOptionButton)).perform(click());
         onView(withId(R.id.optionsView)).check(matches(hasChildCount(3)));
     }
 
     /**
-     * Ensures that the save button updates the passed object and ends the activity.
+     * Ensures that the save button updates the static question object in Question.
      */
     @Test
     public void SaveButtonShouldSaveObject(){
         String title = "Save Title";
+        int expectedNumberOfOptions = question.options.size() + 1;
         rule.launchActivity(intent);
         onView(withId(R.id.addNewOptionButton)).perform(click());
+        onView(withId(R.id.questionName)).perform(clearText());
+        onView(withId(R.id.questionName)).perform(typeText(title), closeSoftKeyboard());
         onView(withId(R.id.saveButton)).perform(click());
-        onView(withId(R.id.questionName)).perform(typeText(title));
-        assertTrue(rule.getActivity() == null);
-        assertEquals(question.options.size(), 3);
-        assertEquals(question.title, title);
+        Question returnedObject = Question.getQuestionObject();
+        assertEquals(expectedNumberOfOptions, returnedObject.options.size());
+        assertEquals(returnedObject.title, title);
     }
 
     /**
@@ -96,14 +98,17 @@ public class EditQuestionUITests {
         int numberOfElementsBefore = question.options.size();
 
         onView(withId(R.id.addNewOptionButton)).perform(click());
+        onView(withId(R.id.questionName)).perform(clearText());
+        onView(withId(R.id.questionName)).perform(typeText(title), closeSoftKeyboard());
         onView(withId(R.id.cancelButton)).perform(click());
-        onView(withId(R.id.questionName)).perform(typeText(title));
 
-        assertTrue(rule.getActivity() == null);
-        assertEquals(question.options.size(), numberOfElementsBefore);
+        assertEquals(numberOfElementsBefore, question.options.size());
         assertNotEquals(question.title, title);
     }
 
+    /**
+     * Ensures that the title of the question gets populated
+     */
     @Test
     public void TitleShouldGetPopulatedCorrectly(){
         rule.launchActivity(intent);
@@ -111,6 +116,9 @@ public class EditQuestionUITests {
         rule.finishActivity();
     }
 
+    /**
+     * Ensures that the remove button removes an item from the layout.
+     */
     @Test
     public void RemoveButtonShouldRemoveItemFromLayout(){
         rule.launchActivity(intent);
