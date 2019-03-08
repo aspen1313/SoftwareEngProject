@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Question implements Serializable {
     public String title;
     public ArrayList<String> options;
-    public ArrayList<Integer> votes;
+    public static ArrayList<Integer> votes;
 
     private static Question question = null;
     private Question(String title, ArrayList<String> options){
@@ -40,7 +40,8 @@ public class Question implements Serializable {
      * Allows a question to be voted on using the index of the option that the user chose. Unimplemented.
      * @param voteIndex
      */
-    public void vote(int voteIndex){
+    public static void vote(int voteIndex){
+        votes.set(voteIndex, votes.get(voteIndex)+1);
         return;
     }
 
