@@ -14,6 +14,7 @@ public class Question implements Serializable {
     public ArrayList<String> options;
     public ArrayList<Integer> votes;
 
+    private static Question question = null;
     private Question(String title, ArrayList<String> options){
         this.title = title;
         this.options = options;
@@ -58,5 +59,31 @@ public class Question implements Serializable {
             results.put(option, voteCount);
         }
         return results;
+    }
+
+    /**
+     * Works in combination with getQuestionObject to ensure that we never overwrite our question
+     * object unless we intended to by calling getQuestionObject first.
+     * @param q
+     * @return
+     */
+    public static boolean setQuestionObject(Question q){
+        if(question == null){
+            question = q;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Works with setQuestionObject to retrieve the question object so we can pass Question data
+     * from a sub-activity to its parent activity.
+     * @return
+     */
+    public static Question getQuestionObject(){
+        Question q = question;
+        question = null;
+        return q;
     }
 }

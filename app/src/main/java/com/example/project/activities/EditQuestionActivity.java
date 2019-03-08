@@ -1,8 +1,11 @@
 package com.example.project.activities;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +14,9 @@ import android.widget.TextView;
 
 import com.example.project.R;
 import com.example.project.models.Question;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * EditQuestionActivity allows admins to edit or create a question object as part of a Poll.
@@ -80,6 +86,7 @@ public class EditQuestionActivity extends AppCompatActivity {
      * Populates the UI with the passed Question. One should always have been passed.
      */
     private void populateUI(){
+        questionName.setText(question.title);
         EditText text;
         for(int i=0; i<question.options.size(); i++){
             text = new EditText(this);
@@ -92,25 +99,47 @@ public class EditQuestionActivity extends AppCompatActivity {
      * Saves the Question object and returns to previous activity.
      */
     private void saveButtonHandler(){
-        return;
+        question.title = questionName.getText().toString();
+        question.options = new ArrayList<>(Collections.nCopies(optionsView.getChildCount(), ""));
+
+        question.votes = new ArrayList<>(Collections.nCopies(question.options.size(), 0));
+
+        for(int i=0; i < optionsView.getChildCount(); i++){
+            View view = optionsView.getChildAt(i);
+            if(view instanceof EditText){
+                EditText editText = (EditText)view;
+                question.options.set(i, editText.getText().toString());
+            }
+        }
+
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("questionResult", question);
+        setResult(Activity.RESULT_OK, resultIntent);
+
+        Question.setQuestionObject(question);
+        finish();
     }
 
     /**
      * Returns to the previous activity without saving.
      */
     private void cancelButtonHandler(){
-        return;
+        finish();
     }
 
     /**
      * Add new EditText item to the layout.
      */
     private void addNewItemButtonHandler(){
-        return;
+        int indexToAddNew = optionsView.getChildCount();
+        optionsView.addView(new EditText(this), indexToAddNew);
     }
 
     /**
      * Removes last item from the layout.
      */
-    private void removeItemButtonHandler(){return;}
+    private void removeItemButtonHandler(){
+        int indexToRemove = optionsView.getChildCount() - 1;
+        optionsView.removeViewAt(indexToRemove);
+    }
 }
