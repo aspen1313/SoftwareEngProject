@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.project.activities.EditQuestionActivity;
+import com.example.project.models.Question;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button admin;
@@ -15,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        
         admin = findViewById(R.id.adminEntryButton);
         student = findViewById(R.id.studentEntryButton);
 
