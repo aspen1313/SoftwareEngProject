@@ -17,6 +17,12 @@ public class Poll extends APoll implements Serializable {
     public String eDate;
 
     /**
+     * Private constructor for serialization compatibility.
+     */
+    private Poll(){
+    }
+
+    /**
      * Creates an empty Poll.
      * Deprecated as it was never supposed to be used. Remove all references to this constructor.
      */

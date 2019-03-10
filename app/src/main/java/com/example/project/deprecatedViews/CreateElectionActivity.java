@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.deprecatedViews;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.project.AdminPage;
+import com.example.project.R;
 import com.example.project.models.Poll;
 import com.example.project.models.Question;
 import com.google.firebase.firestore.DocumentReference;

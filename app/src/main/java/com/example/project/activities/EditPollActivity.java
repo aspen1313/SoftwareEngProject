@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.project.QuestionAdapter;
+import com.example.project.viewAdapters.QuestionAdapter;
 import com.example.project.R;
 import com.example.project.models.Poll;
 import com.example.project.models.Question;
@@ -68,21 +68,18 @@ public class EditPollActivity extends AppCompatActivity {
                 addButtonHandler();
             }
         });
-
         removeItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeButtonHandler();
             }
         });
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveButtonHandler();
             }
         });
-
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,8 +148,10 @@ public class EditPollActivity extends AppCompatActivity {
     private void removeButtonHandler(){
         QuestionAdapter adapter = (QuestionAdapter)recyclerView.getAdapter();
         if(adapter != null){
-            dataSet.remove(dataSet.size() - 1);
-            adapter.notifyItemRemoved(dataSet.size());
+            if(dataSet.size() != 0) {
+                dataSet.remove(dataSet.size() - 1);
+                adapter.notifyItemRemoved(dataSet.size());
+            }
         }
     }
 

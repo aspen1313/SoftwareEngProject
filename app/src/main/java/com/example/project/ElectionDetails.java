@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.project.deprecatedViews.ViewElections;
 import com.example.project.models.Poll;
 
 public class ElectionDetails extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class ElectionDetails extends AppCompatActivity {
                 TextView changeOpen = (TextView) findViewById(R.id.openDateChange);
                 String openDate = changeOpen.getText().toString();
                 e.open(openDate);
-                Intent intent = new Intent(getApplicationContext(),ViewElections.class);
+                Intent intent = new Intent(getApplicationContext(), ViewElections.class);
                 startActivity(intent);
             }
         });

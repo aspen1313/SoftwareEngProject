@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.EditPollActivity"></activity>
+        <activity android:name=".activities.ViewPollsActivity"></activity>
+        <activity android:name=".activities.EditPollActivity" />
         <activity android:name=".activities.EditQuestionActivity" />
         <activity android:name=".VotingBallots" />
         <activity android:name=".StudentPage" />
         <activity android:name=".ElectionDetails" />
-        <activity android:name=".ViewElections" />
+        <activity android:name=".deprecatedViews.ViewElections" />
         <activity android:name=".AdminPage" />
-        <activity android:name=".CreateElectionActivity" />
+        <activity android:name=".deprecatedViews.CreateElectionActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

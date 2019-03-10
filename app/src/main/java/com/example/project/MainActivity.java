@@ -6,11 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.project.activities.EditQuestionActivity;
-import com.example.project.models.Question;
-
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     private Button admin;
@@ -20,26 +15,37 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         admin = findViewById(R.id.adminEntryButton);
         student = findViewById(R.id.studentEntryButton);
 
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminPage.class);
-                startActivity(intent);
+                adminButtonHandler();
             }
         });
-
-
         student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), StudentPage.class);
-                startActivity(intent);
+                studentButtonHandler();
             }
         });
+    }
 
+    /**
+     * goes to the student view
+     */
+    private void studentButtonHandler(){
+        Intent intent = new Intent(getApplicationContext(), StudentPage.class);
+        startActivity(intent);
+    }
+
+    /**
+     * goes to the admin view
+     */
+    private void adminButtonHandler(){
+        Intent intent = new Intent(getApplicationContext(), AdminPage.class);
+        startActivity(intent);
     }
 }
