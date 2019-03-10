@@ -26,7 +26,7 @@ public class Question implements Serializable {
      * The number of votes for each corresponding option.
      * Indices here correspond to indices in options.
      */
-    public static ArrayList<Integer> votes;
+    public ArrayList<Integer> votes;
 
     /**
      * A static reference used to pass edited question objects to activities.
@@ -63,7 +63,7 @@ public class Question implements Serializable {
      * Allows a question to be voted on using the index of the option that the user chose. Unimplemented.
      * @param voteIndex
      */
-    public static void vote(int voteIndex){
+    public void vote(int voteIndex){
         votes.set(voteIndex, votes.get(voteIndex)+1);
         return;
     }

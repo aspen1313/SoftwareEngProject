@@ -35,7 +35,7 @@ public class VotingBallots extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int selectedOption = optionsGroup.getCheckedRadioButtonId();
-                Question.vote(selectedOption);
+                //Question.vote(selectedOption);
                 Intent intent = new Intent(getApplicationContext(), VotingBallots.class);
                 startActivity(intent);
 
@@ -55,7 +55,7 @@ public class VotingBallots extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int selectedOption = optionsGroup.getCheckedRadioButtonId();
-                Question.vote(selectedOption);
+                //Question.vote(selectedOption);
                 Intent intent = new Intent(getApplicationContext(), StudentPage.class);
                 startActivity(intent);
             }
