@@ -34,6 +34,12 @@ public class Question implements Serializable {
     private static Question editingQuestion = null;
 
     /**
+     * Private constructor for serialization compatibility.
+     */
+    private Question(){
+    }
+
+    /**
      * Private constructor used by getNewQuestion only.
      * @param title
      * @param options

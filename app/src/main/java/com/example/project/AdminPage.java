@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.project.activities.EditPollActivity;
+import com.example.project.activities.ViewPollsActivity;
 import com.example.project.models.Poll;
 import com.example.project.models.Question;
 
@@ -28,24 +29,36 @@ public class AdminPage extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EditPollActivity.class);
-                ArrayList<String> options = new ArrayList<>();
-                options.add("Default Option");
-                Poll poll = Poll.getNewElection("Default Title",
-                        Question.getNewQuestion("Default Question", options));
-                intent.putExtra("poll", poll);
-
-                startActivity(intent);
+                createNewPollHandler();
             }
         });
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ViewElections.class);
-                startActivity(intent);
+                viewPollsHandler();
             }
         });
+    }
 
+    /**
+     * Creates a new basic poll object, and starts an activity to edit that activity.
+     */
+    public void createNewPollHandler(){
+        Intent intent = new Intent(getApplicationContext(), EditPollActivity.class);
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Default Option");
+        Poll poll = Poll.getNewElection("Default Title",
+                Question.getNewQuestion("Default Question", options));
+        intent.putExtra("poll", poll);
+        startActivity(intent);
+    }
+
+    /**
+     * Starts the view poll activity
+     */
+    public void viewPollsHandler(){
+        Intent intent = new Intent(getApplicationContext(), ViewPollsActivity.class);
+        startActivity(intent);
     }
 }

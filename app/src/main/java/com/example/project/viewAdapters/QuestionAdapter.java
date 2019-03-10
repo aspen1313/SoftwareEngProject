@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.viewAdapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.project.R;
 import com.example.project.models.Question;
 
 import java.util.ArrayList;
@@ -14,6 +16,11 @@ import java.util.ArrayList;
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>{
 
     private ArrayList<Question> mDataset;
+
+    /**
+     * View holder for the Question View.
+     * We don't really need this except in the context of an adapter, so it is defined in here.
+     */
     public static class QuestionViewHolder extends RecyclerView.ViewHolder{
         public TextView text;
         public Button editButton;
