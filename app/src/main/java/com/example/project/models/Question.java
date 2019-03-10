@@ -10,11 +10,34 @@ import java.util.HashMap;
  * poll / election
  */
 public class Question implements Serializable {
+    /**
+     * The question being posed.
+     * example: "What kind of pizza do you want?"
+     */
     public String title;
-    public ArrayList<String> options;
-    public static ArrayList<Integer> votes;
 
-    private static Question question = null;
+    /**
+     * A number of options that can answer the question for voters to choose from.
+     * example: Pepperoni, Vegetarian, Cheese
+     */
+    public ArrayList<String> options;
+
+    /**
+     * The number of votes for each corresponding option.
+     * Indices here correspond to indices in options.
+     */
+    public ArrayList<Integer> votes;
+
+    /**
+     * A static reference used to pass edited question objects to activities.
+     */
+    private static Question editingQuestion = null;
+
+    /**
+     * Private constructor used by getNewQuestion only.
+     * @param title
+     * @param options
+     */
     private Question(String title, ArrayList<String> options){
         this.title = title;
         this.options = options;
@@ -40,7 +63,7 @@ public class Question implements Serializable {
      * Allows a question to be voted on using the index of the option that the user chose. Unimplemented.
      * @param voteIndex
      */
-    public static void vote(int voteIndex){
+    public void vote(int voteIndex){
         votes.set(voteIndex, votes.get(voteIndex)+1);
         return;
     }
@@ -69,8 +92,8 @@ public class Question implements Serializable {
      * @return
      */
     public static boolean setQuestionObject(Question q){
-        if(question == null){
-            question = q;
+        if(editingQuestion == null){
+            editingQuestion = q;
             return true;
         }else{
             return false;
@@ -83,8 +106,8 @@ public class Question implements Serializable {
      * @return
      */
     public static Question getQuestionObject(){
-        Question q = question;
-        question = null;
+        Question q = editingQuestion;
+        editingQuestion = null;
         return q;
     }
 }

@@ -113,9 +113,11 @@ public class EditQuestionActivity extends AppCompatActivity {
         }
 
         Intent resultIntent = new Intent();
-        resultIntent.putExtra("questionResult", question);
+        resultIntent.putExtra("question", question);
+        resultIntent.putExtra("index", intent.getSerializableExtra("index"));
         setResult(Activity.RESULT_OK, resultIntent);
 
+        // For testing purposes ONLY
         Question.setQuestionObject(question);
         finish();
     }
@@ -140,6 +142,8 @@ public class EditQuestionActivity extends AppCompatActivity {
      */
     private void removeItemButtonHandler(){
         int indexToRemove = optionsView.getChildCount() - 1;
-        optionsView.removeViewAt(indexToRemove);
+        if(indexToRemove != -1){
+            optionsView.removeViewAt(indexToRemove);
+        }
     }
 }
