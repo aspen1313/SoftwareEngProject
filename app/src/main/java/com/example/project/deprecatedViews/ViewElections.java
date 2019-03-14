@@ -16,9 +16,9 @@ public class ViewElections extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_elections);
+        //setContentView(R.layout.activity_view_elections);
 
-        viewDetails = findViewById(R.id.detailsButton);
+        //viewDetails = findViewById(R.id.detailsButton);
 
         viewDetails.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.example.project.activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,45 +10,45 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.project.ElectionDetails;
-import com.example.project.viewAdapters.PollViewHolder;
 import com.example.project.R;
+import com.example.project.StudentPage;
 import com.example.project.models.Poll;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.project.viewAdapters.PollViewHolderStudent;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-/**
- * A very simple view for the Polls using the FirestoreRecyclerAdapter.
- */
-public class ViewPollsActivity extends AppCompatActivity {
+public class ViewPollsActivityStudent extends AppCompatActivity {
+
     RecyclerView pollView;
-    FirestoreRecyclerAdapter adapter;
-    FirebaseFirestore database;
+    FirestoreRecyclerAdapter adapter1;
+    FirebaseFirestore database1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_polls);
+        setContentView(R.layout.activity_view_polls_student);
 
-        pollView = findViewById(R.id.pollRecyclerView);
-        database = FirebaseFirestore.getInstance();
-        adapter = setUpAdapter(database);
-        setUpRecyclerView(pollView, adapter);
+
+        pollView = findViewById(R.id.studentRecycler);
+        database1 = FirebaseFirestore.getInstance();
+        adapter1 = setUpAdapter(database1);
+        setUpRecyclerView(pollView, adapter1);
     }
+
 
     /**
      * Function to set up the recycler view
-     * @param rv
-     * @param adapter
+     * @param pollView
+     * @param adapter1
      */
-    private void setUpRecyclerView(RecyclerView rv, FirestoreRecyclerAdapter adapter){
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
-        rv.setLayoutManager(manager);
-        rv.setItemAnimator(new DefaultItemAnimator());
-        rv.setAdapter(adapter);
+    private void setUpRecyclerView(RecyclerView pollView, FirestoreRecyclerAdapter adapter1) {
+        RecyclerView.LayoutManager manager1 = new LinearLayoutManager(getApplicationContext());
+        pollView.setLayoutManager(manager1);
+        pollView.setItemAnimator(new DefaultItemAnimator());
+        pollView.setAdapter(adapter1);
     }
 
     /**
@@ -62,37 +63,40 @@ public class ViewPollsActivity extends AppCompatActivity {
                 .setQuery(query, Poll.class)
                 .build();
 
-        FirestoreRecyclerAdapter adapter = new FirestoreRecyclerAdapter<Poll, PollViewHolder>(options){
+        FirestoreRecyclerAdapter adapter1 = new FirestoreRecyclerAdapter<Poll, PollViewHolderStudent>(options){
             @Override
-            public void onBindViewHolder(PollViewHolder holder, int position, final Poll model){
-                holder.text.setText(model.title);
-                holder.button.setOnClickListener(new View.OnClickListener() {
+            protected void onBindViewHolder(@NonNull PollViewHolderStudent holder, int pos, final Poll model1) {
+                holder.titleText.setText(model1.title);
+                holder.viewBut.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), EditPollActivity.class);
-                        intent.putExtra("poll", model);
+                        intent.putExtra("poll", model1);
                         startActivity(intent);
+
                     }
                 });
 
-                holder.edit.setOnClickListener(new View.OnClickListener() {
+                holder.voteProcess.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), ElectionDetails.class);
-                        intent.putExtra("poll", model);
+                        Intent intent = new Intent(getApplicationContext(), StudentPage.class);
+                        intent.putExtra("poll", model1);
                         startActivity(intent);
+
                     }
                 });
             }
 
+
             @Override
-            public PollViewHolder onCreateViewHolder(ViewGroup parent, int i){
+            public PollViewHolderStudent onCreateViewHolder(ViewGroup parent, int i){
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.poll_view_holder, parent, false);
-                return new PollViewHolder(view);
+                        .inflate(R.layout.activity_poll_view_holder_student, parent, false);
+                return new PollViewHolderStudent(view);
             }
         };
-        return adapter;
+        return adapter1;
     }
 
     /**
@@ -101,7 +105,7 @@ public class ViewPollsActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        adapter.startListening();
+        adapter1.startListening();
     }
 
     /**
@@ -110,6 +114,6 @@ public class ViewPollsActivity extends AppCompatActivity {
     @Override
     protected void onStop(){
         super.onStop();
-        adapter.stopListening();
+        adapter1.stopListening();
     }
 }

@@ -29,7 +29,7 @@ public class CreateElectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_election);
+      //  setContentView(R.layout.activity_create_election);
 
         intent = getIntent();
         if(intent.getSerializableExtra("questions") != null){
@@ -37,9 +37,9 @@ public class CreateElectionActivity extends AppCompatActivity {
         }
         database = FirebaseFirestore.getInstance();
 
-        next = findViewById(R.id.nextButton);
+      //  next = findViewById(R.id.nextButton);
         cancel = findViewById(R.id.cancelButtonStudent);
-        done = findViewById(R.id.doneButton);
+       // done = findViewById(R.id.doneButton);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +78,7 @@ public class CreateElectionActivity extends AppCompatActivity {
     }
 
     private void collectDataIntoQuestion(){
-        TextView question = findViewById(R.id.editQuestion);
+ /*       TextView question = findViewById(R.id.editQuestion);
         TextView choice1 = findViewById(R.id.choiceText1);
         TextView choice2 = findViewById(R.id.choiceText2);
         TextView choice3 = findViewById(R.id.choiceText3);
@@ -97,5 +97,5 @@ public class CreateElectionActivity extends AppCompatActivity {
             questions = new ArrayList<>();
         }
         questions.add(q);
-    }
+*/    }
 }

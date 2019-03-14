@@ -117,7 +117,6 @@ public class Poll extends APoll implements Serializable {
     public void open(String openDate)
     {
        sDate = openDate;
-
     }
 
 
