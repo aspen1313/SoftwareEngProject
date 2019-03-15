@@ -13,10 +13,12 @@ import com.example.project.R;
 public class PollViewHolder extends RecyclerView.ViewHolder{
     public TextView text;
     public Button button;
+    public Button edit;
 
     public PollViewHolder(View view) {
         super(view);
         text = view.findViewById(R.id.pollTitleTextView);
         button = view.findViewById(R.id.pollDetailsButton);
+        edit = view.findViewById(R.id.EditInfoButton);
     }
 }
