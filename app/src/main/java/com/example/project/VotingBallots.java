@@ -22,14 +22,14 @@ public class VotingBallots extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  /*      super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting_ballots);
 
         next = findViewById(R.id.nextQuesButton);
         cancel = findViewById(R.id.cancelButtonStudent);
         done = findViewById(R.id.doneVotingButton);
         optionsGroup = (RadioGroup) findViewById(R.id.radioGroup);
-
+*/
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
