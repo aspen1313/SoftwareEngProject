@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>{
 
     private ArrayList<Question> mDataset;
-
     /**
      * View holder for the Question View.
      * We don't really need this except in the context of an adapter, so it is defined in here.
