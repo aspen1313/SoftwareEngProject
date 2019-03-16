@@ -15,6 +15,10 @@ import com.example.project.viewAdapters.OptionResultsAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * A very simple view that shows a detailed breakdown of a specific question.
+ * Essentially just a recycler view with each option and the corresponding number of votes.
+ */
 public class QuestionDetailView extends AppCompatActivity {
     private Question question;
     private TextView titleView;
@@ -23,6 +27,10 @@ public class QuestionDetailView extends AppCompatActivity {
 
     ArrayList<String> dataset;
 
+    /**
+     * Sets one listener and finds our views.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +49,9 @@ public class QuestionDetailView extends AppCompatActivity {
         populateWithData();
     }
 
+    /**
+     * Populates our view(s) with data.
+     */
     private void populateWithData(){
         question = (Question)getIntent().getSerializableExtra("question");
         titleView.setText(question.title);
@@ -49,6 +60,9 @@ public class QuestionDetailView extends AppCompatActivity {
         configureRecyclerView();
     }
 
+    /**
+     * Configures a simple recycler adapter to our view.
+     */
     private void configureRecyclerView(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         optionsView.setLayoutManager(layoutManager);

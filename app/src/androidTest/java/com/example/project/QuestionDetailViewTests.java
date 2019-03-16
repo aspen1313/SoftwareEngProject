@@ -19,6 +19,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+/**
+ * Tests QuestionDetailView
+ */
 public class QuestionDetailViewTests {
     private static final String QUESTION_TITLE = "Dummy Title";
     private static final int N_OPTIONS = 5;
@@ -28,6 +31,9 @@ public class QuestionDetailViewTests {
             = new ActivityTestRule<>(QuestionDetailView.class, false, false);
     private ArrayList<String> options;
 
+    /**
+     * Performs some basic setup by creating dummy objects.
+     */
     @Before
     public void setup(){
         options = new ArrayList<>();
@@ -45,6 +51,9 @@ public class QuestionDetailViewTests {
         intent.putExtra("question", question);
     }
 
+    /**
+     * Ensures the title gets populated correctly.
+     */
     @Test
     public void TitleGetsPopulatedCorrectly(){
         rule.launchActivity(intent);
@@ -52,6 +61,9 @@ public class QuestionDetailViewTests {
         rule.finishActivity();
     }
 
+    /**
+     * Tests for the correct number of options in the recycler view.
+     */
     @Test
     public void CorrectNumberOfOptionsInView(){
         rule.launchActivity(intent);

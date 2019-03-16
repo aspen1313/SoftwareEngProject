@@ -17,6 +17,9 @@ import com.example.project.viewAdapters.QuestionResultsAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * Allows the user to look at the results of different polls.
+ */
 public class PollResultsActivity extends AppCompatActivity {
     // Views
     private RecyclerView recyclerView;
@@ -27,6 +30,10 @@ public class PollResultsActivity extends AppCompatActivity {
     private Poll poll;
     private ArrayList<Question> dataSet;
 
+    /**
+     * Runs when the activity is created.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +71,16 @@ public class PollResultsActivity extends AppCompatActivity {
         dataSet = poll.questions;
     }
 
+    /**
+     * Creates and overrides an adapter and sets up the recycler view with the correct params.
+     */
     private void configureRecyclerView(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         RecyclerView.Adapter adapter = new QuestionResultsAdapter(dataSet){
             // We override this here because we need access to the application context in order
-            // for the edit button to operate correctly.
+            // for the details button to operate correctly.
             @Override
             public void onBindViewHolder(@NonNull final QuestionViewHolder holder, final int i){
                 holder.setQuestion(getFromDataset(i));

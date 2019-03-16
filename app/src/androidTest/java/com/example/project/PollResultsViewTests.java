@@ -20,6 +20,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+/**
+ * Tests PollResultsActivity
+ */
 public class PollResultsViewTests {
     @Rule
     public ActivityTestRule<PollResultsActivity> rule
@@ -41,6 +44,9 @@ public class PollResultsViewTests {
         intent.putExtra("poll", poll);
     }
 
+    /**
+     * Ensures title is correct
+     */
     @Test
     public void titleIsCorrect(){
         rule.launchActivity(intent);
@@ -48,6 +54,9 @@ public class PollResultsViewTests {
         rule.finishActivity();
     }
 
+    /**
+     * Ensures the view has the correct number of items.
+     */
     @Test
     public void hasCorrectNumberOfItems(){
         for(int j=1; j<TIMES_TO_TEST + 1; j++){
@@ -60,6 +69,12 @@ public class PollResultsViewTests {
         }
     }
 
+    /**
+     * Helper method to get a poll with a certain number of questions.
+     * @param pollTitle
+     * @param n
+     * @return
+     */
     private Poll getPollWithNQuestions(String pollTitle, int n){
         ArrayList<Question> questions = new ArrayList<>();
         ArrayList<String> options = new ArrayList<>();
