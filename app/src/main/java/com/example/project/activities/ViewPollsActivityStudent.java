@@ -22,8 +22,8 @@ import com.google.firebase.firestore.Query;
 public class ViewPollsActivityStudent extends AppCompatActivity {
 
     RecyclerView pollView;
-    FirestoreRecyclerAdapter adapter1;
-    FirebaseFirestore database1;
+    FirestoreRecyclerAdapter adapter;
+    FirebaseFirestore database;
 
 
     @Override
@@ -33,9 +33,9 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
 
 
         pollView = findViewById(R.id.studentRecycler);
-        database1 = FirebaseFirestore.getInstance();
-        adapter1 = setUpAdapter(database1);
-        setUpRecyclerView(pollView, adapter1);
+        database = FirebaseFirestore.getInstance();
+        adapter = setUpAdapter(database);
+        setUpRecyclerView(pollView, adapter);
     }
 
 
@@ -65,13 +65,13 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
 
         FirestoreRecyclerAdapter adapter1 = new FirestoreRecyclerAdapter<Poll, PollViewHolderStudent>(options){
             @Override
-            protected void onBindViewHolder(@NonNull PollViewHolderStudent holder, int pos, final Poll model1) {
-                holder.titleText.setText(model1.title);
+            protected void onBindViewHolder(@NonNull PollViewHolderStudent holder, int pos, final Poll model) {
+                holder.titleText.setText(model.title);
                 holder.viewBut.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), EditPollActivity.class);
-                        intent.putExtra("poll", model1);
+                        Intent intent = new Intent(getApplicationContext(), PollResultsActivity.class);
+                        intent.putExtra("poll", model);
                         startActivity(intent);
 
                     }
@@ -81,7 +81,7 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), StudentPage.class);
-                        intent.putExtra("poll", model1);
+                        intent.putExtra("poll", model);
                         startActivity(intent);
 
                     }
@@ -105,7 +105,7 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        adapter1.startListening();
+        adapter.startListening();
     }
 
     /**
@@ -114,6 +114,6 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
     @Override
     protected void onStop(){
         super.onStop();
-        adapter1.stopListening();
+        adapter.stopListening();
     }
 }
