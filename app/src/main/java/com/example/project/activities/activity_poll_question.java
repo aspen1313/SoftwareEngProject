@@ -1,5 +1,7 @@
 package com.example.project.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,9 @@ import com.example.project.viewAdapters.OptionResultsAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * activity_poll_question allows students to vote on a question object as part of a Poll.
+ */
 public class activity_poll_question extends AppCompatActivity {
     private Question question;
     private TextView titleView;
@@ -24,7 +29,12 @@ public class activity_poll_question extends AppCompatActivity {
     private RadioGroup optionsView;
 
     ArrayList<String> dataset;
+    private Intent intent;
 
+    /**
+     * Here we set our listeners to our event handlers, and get references to our UI elements.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +42,9 @@ public class activity_poll_question extends AppCompatActivity {
 
         titleView = findViewById(R.id.questionView);
         optionsView = findViewById(R.id.questionRadioGoup);
+        intent = getIntent();
+
+
         backButton = findViewById(R.id.backbutton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,19 +53,34 @@ public class activity_poll_question extends AppCompatActivity {
             }
         });
         voteButton = findViewById(R.id.votebutton);
-        voteButton.setOnClickListener(new View.OnClickListener() {
+        voteButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                if(optionsView.getCheckedRadioButtonId()!=-1){
-                    question.vote(optionsView.getCheckedRadioButtonId());
-                    System.out.println(question.votes);
-                    finish();
-                }
+            public void onClick(View v){
+                voteButtonHandler();
             }
         });
         populateWithData();
     }
 
+    /**
+     * Saves the Question object and vote index and returns to previous activity.
+     */
+    private void voteButtonHandler(){
+        if(optionsView.getCheckedRadioButtonId()!=-1){
+            question.vote(optionsView.getCheckedRadioButtonId());
+        }
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("question", question);
+        resultIntent.putExtra("index", intent.getSerializableExtra("index"));
+        resultIntent.putExtra("voteIndex", optionsView.getCheckedRadioButtonId());
+        setResult(Activity.RESULT_OK, resultIntent);
+
+        finish();
+    }
+
+    /**
+     * Populates the UI with the passed Question. One should always have been passed.
+     */
     private void populateWithData(){
         question = (Question)getIntent().getSerializableExtra("question");
         titleView.setText(question.title);

@@ -20,7 +20,7 @@ import java.util.Collections;
 
 /**
  * EditQuestionActivity allows admins to edit or create a question object as part of a Poll.
- * */
+ */
 public class EditQuestionActivity extends AppCompatActivity {
     private Button saveButton;
     private Button cancelButton;
