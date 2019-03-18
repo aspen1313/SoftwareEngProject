@@ -70,7 +70,12 @@ public class Question implements Serializable {
      * @param voteIndex
      */
     public void vote(int voteIndex){
-        votes.set(voteIndex, votes.get(voteIndex)+1);
+        for(int i = 0; i < votes.size();i++){
+            if(votes.get(i)==1){
+                votes.set(i, 0);
+            }
+        }
+            votes.set(voteIndex, votes.get(voteIndex) + 1);
         return;
     }
 
