@@ -91,6 +91,17 @@ public class Question implements Serializable {
         return results;
     }
 
+    public String getMostPopularOption(){
+        int highestCount = -1;
+        String currentOption = "";
+        for(int i=0; i< options.size(); i++){
+            if(votes.get(i) > highestCount){
+                currentOption = options.get(i);
+            }
+        }
+        return currentOption;
+    }
+
     /**
      * Works in combination with getQuestionObject to ensure that we never overwrite our question
      * object unless we intended to by calling getQuestionObject first.

@@ -87,4 +87,16 @@ public class QuestionTests {
         assertNotNull(Question.getQuestionObject());
         assertNull(Question.getQuestionObject());
     }
+
+    @Test
+    public void MostPopularOptionCorrectlyReturned(){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Option 1");
+        options.add("Option 2");
+        Question q = Question.getNewQuestion("Question", options);
+        q.votes.set(0,5);
+        q.votes.set(1,10);
+
+        assertEquals(q.getMostPopularOption(), "Option 2");
+    }
 }
