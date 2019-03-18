@@ -16,6 +16,17 @@ import static org.junit.Assert.assertNull;
 public class QuestionTests {
     Question question;
 
+    public Question question(String title){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Option 1");
+        options.add("Option 2");
+        Question question = Question.getNewQuestion(title, options);
+
+        question.votes.set(0, 2);
+        question.votes.set(1, 9);
+        return question;
+    }
+
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
@@ -30,23 +41,14 @@ public class QuestionTests {
 
     @Test
     public void QuestionCreatedOnSensibleInput(){
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Test Option 1");
-        options.add("Test Option 2");
 
-        question = Question.getNewQuestion("Test Question", options);
+        question = question("Question");
         assertNotNull(question);
     }
 
     @Test
     public void VotesCountedProperlyOnQuestion(){
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Option 1");
-        options.add("Option 2");
-        Question question = Question.getNewQuestion("Question", options);
-
-        question.votes.set(0, 2);
-        question.votes.set(1, 9);
+        question = question("Question");
 
         assertEquals((int)question.getResults().get("Option 1"), 2);
         assertEquals((int)question.getResults().get("Option 2"), 9);
@@ -54,12 +56,7 @@ public class QuestionTests {
 
     @Test
     public void AddVoteOption1(){
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Option 1");
-        options.add("Option 2");
-        Question question = Question.getNewQuestion("Question", options);
-        question.votes.set(0, 2);
-        question.votes.set(1, 9);
+        question = question("Question");
 
         question.vote(0);
         assertEquals((int)question.getResults().get("Option 1"), 3);
@@ -67,13 +64,7 @@ public class QuestionTests {
 
     @Test
     public void AddVoteOption2(){
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Option 1");
-        options.add("Option 2");
-        Question question = Question.getNewQuestion("Question", options);
-
-        question.votes.set(0, 2);
-        question.votes.set(1, 9);
+        question = question("Question");
 
         question.vote(1);
         assertEquals((int)question.getResults().get("Option 2"), 10);
@@ -81,11 +72,8 @@ public class QuestionTests {
 
     @Test
     public void SettingQuestionDoesNotOverwriteExistingQuestion(){
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Option 1");
-        options.add("Option 2");
-        Question question = Question.getNewQuestion("Question", options);
-        Question question2 = Question.getNewQuestion("Question2", options);
+        question = question("Question");
+        Question question2 = question("Question2");
 
         Question.setQuestionObject(question);
         assertFalse(Question.setQuestionObject(question2));
@@ -93,12 +81,9 @@ public class QuestionTests {
 
     @Test
     public void QuestionObjectGetsNulledCorrectlyWhenGetIsCalled(){
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Option 1");
-        options.add("Option 2");
-        Question question = Question.getNewQuestion("Question", options);
+        question = question("Question");
         Question.setQuestionObject(question);
-        
+
         assertNotNull(Question.getQuestionObject());
         assertNull(Question.getQuestionObject());
     }
