@@ -80,7 +80,7 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
                 holder.voteProcess.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), StudentPage.class);
+                        Intent intent = new Intent(getApplicationContext(), VoteQuestionActivity.class);
                         intent.putExtra("poll", model);
                         startActivity(intent);
 

@@ -33,6 +33,8 @@ public class Question implements Serializable {
      */
     private static Question editingQuestion = null;
 
+    private int voteIndex = -1;
+
     /**
      * Private constructor for serialization compatibility.
      */
@@ -66,11 +68,12 @@ public class Question implements Serializable {
     }
 
     /**
-     * Allows a question to be voted on using the index of the option that the user chose. Unimplemented.
+     * Allows a question to be voted on using the index of the option that the user chose.
      * @param voteIndex
      */
     public void vote(int voteIndex){
-        votes.set(voteIndex, votes.get(voteIndex)+1);
+        if (voteIndex != -1)
+            votes.set(voteIndex, votes.get(voteIndex) + 1);
         return;
     }
 
