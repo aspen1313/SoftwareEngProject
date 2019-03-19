@@ -66,9 +66,6 @@ public class activity_poll_question extends AppCompatActivity {
      * Saves the Question object and vote index and returns to previous activity.
      */
     private void voteButtonHandler(){
-        if(optionsView.getCheckedRadioButtonId()!=-1){
-            question.vote(optionsView.getCheckedRadioButtonId());
-        }
         Intent resultIntent = new Intent();
         resultIntent.putExtra("question", question);
         resultIntent.putExtra("index", intent.getSerializableExtra("index"));
