@@ -97,8 +97,10 @@ public class Question implements Serializable {
     public String getMostPopularOption(){
         int highestCount = -1;
         String currentOption = "";
+
         for(int i=0; i< options.size(); i++){
             if(votes.get(i) > highestCount){
+                highestCount = votes.get(i);
                 currentOption = options.get(i);
             }
         }
