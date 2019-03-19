@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.example.project.activities.ViewPollsActivityStudent;
 
 public class StudentPage extends AppCompatActivity {
 
@@ -16,15 +17,23 @@ public class StudentPage extends AppCompatActivity {
         setContentView(R.layout.activity_student_page);
 
 
-        view = findViewById(R.id.viewVoteButton);
+        view = findViewById(R.id.viewElectionsButton);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), VotingBallots.class);
-                startActivity(intent);
+                viewStudentPollsHandler();
             }
         });
 
     }
+
+    /**
+     * Starts the view poll activity
+     */
+    public void viewStudentPollsHandler(){
+        Intent intent = new Intent(getApplicationContext(), ViewPollsActivityStudent.class);
+        startActivity(intent);
+    }
+
 }

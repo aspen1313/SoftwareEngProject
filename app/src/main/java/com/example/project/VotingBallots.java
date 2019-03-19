@@ -5,29 +5,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.example.project.models.Question;
 
 public class VotingBallots extends AppCompatActivity {
 
     private Button next;
     private Button cancel;
     private Button done;
+    private RadioGroup optionsGroup;
+    private RadioButton optionsButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  /*      super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting_ballots);
 
         next = findViewById(R.id.nextQuesButton);
         cancel = findViewById(R.id.cancelButtonStudent);
         done = findViewById(R.id.doneVotingButton);
+        optionsGroup = (RadioGroup) findViewById(R.id.radioGroup);
+*/
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int selectedOption = optionsGroup.getCheckedRadioButtonId();
+                //Question.vote(selectedOption);
                 Intent intent = new Intent(getApplicationContext(), VotingBallots.class);
                 startActivity(intent);
+
             }
         });
 
@@ -43,6 +54,8 @@ public class VotingBallots extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int selectedOption = optionsGroup.getCheckedRadioButtonId();
+                //Question.vote(selectedOption);
                 Intent intent = new Intent(getApplicationContext(), StudentPage.class);
                 startActivity(intent);
             }

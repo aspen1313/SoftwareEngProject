@@ -22,19 +22,30 @@ public class MainActivity extends AppCompatActivity {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminPage.class);
-                startActivity(intent);
+                adminButtonHandler();
             }
         });
-
-
         student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), StudentPage.class);
-                startActivity(intent);
+                studentButtonHandler();
             }
         });
+    }
 
+    /**
+     * goes to the student view
+     */
+    private void studentButtonHandler(){
+        Intent intent = new Intent(getApplicationContext(), StudentPage.class);
+        startActivity(intent);
+    }
+
+    /**
+     * goes to the admin view
+     */
+    private void adminButtonHandler(){
+        Intent intent = new Intent(getApplicationContext(), AdminPage.class);
+        startActivity(intent);
     }
 }
