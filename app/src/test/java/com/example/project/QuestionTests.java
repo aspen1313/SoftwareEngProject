@@ -96,7 +96,8 @@ public class QuestionTests {
         Question q = Question.getNewQuestion("Question", options);
         q.votes.set(0,5);
         q.votes.set(1,10);
-
         assertEquals(q.getMostPopularOption(), "Option 2");
+        q.votes.set(0,20);
+        assertEquals(q.getMostPopularOption(), "Option 1");
     }
 }
