@@ -57,7 +57,7 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
      * @return
      */
     private FirestoreRecyclerAdapter setUpAdapter(FirebaseFirestore db){
-        Query query = db.collection("polls");
+        Query query = db.collection("polls").whereEqualTo("isOpen",true);
 
         FirestoreRecyclerOptions<Poll> options = new FirestoreRecyclerOptions.Builder<Poll>()
                 .setQuery(query, Poll.class)
