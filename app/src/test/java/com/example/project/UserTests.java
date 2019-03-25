@@ -55,6 +55,12 @@ public class UserTests {
     }
 
     @Test
+    public void votedOnCanBeCalledMoreThanOnceWithSameID(){
+        user.votedOnPoll(VOTED_ON_POLL_ID);
+        user.votedOnPoll(VOTED_ON_POLL_ID);
+    }
+
+    @Test
     public void getUsernameReturnsCorrectUsername(){
         assertEquals(USERNAME, user.getUsername());
     }
