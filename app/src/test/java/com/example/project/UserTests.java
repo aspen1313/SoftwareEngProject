@@ -24,6 +24,8 @@ public class UserTests {
     private String NOT_VOTED_POLL_ID = "NOT_VOTED";
     private String USERNAME = "username";
 
+    private String FIRESTORE_ID = "12345ABCDEFG";
+
     @Before
     public void runBeforeTests(){
         ArrayList<String> options = new ArrayList<>();
@@ -36,10 +38,10 @@ public class UserTests {
         notVotedPoll = Poll.getNewElection("Test Poll 2", question);
         notVotedPoll.id = NOT_VOTED_POLL_ID;
 
-        user = new User(USERNAME, false);
+        user = new User(FIRESTORE_ID, USERNAME, false);
         user.votedOnPoll(poll.id);
 
-        adminUser = new User(USERNAME, true);
+        adminUser = new User(FIRESTORE_ID, USERNAME, true);
     }
 
     @Test
@@ -65,5 +67,10 @@ public class UserTests {
     @Test
     public void isAdminReturnsFalseWhenUserNotAdmin(){
         assertFalse(user.isAdmin());
+    }
+
+    @Test
+    public void getFireStoreIDReturnsCorrectID(){
+        assertEquals(FIRESTORE_ID, user.getFirestoreId());
     }
 }
