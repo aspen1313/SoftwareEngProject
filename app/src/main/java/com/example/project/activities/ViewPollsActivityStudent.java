@@ -11,21 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.project.R;
-import com.example.project.StudentPage;
 import com.example.project.models.Poll;
 import com.example.project.viewAdapters.PollViewHolderStudent;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+
 
 public class ViewPollsActivityStudent extends AppCompatActivity {
 
@@ -65,7 +60,7 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
      * @return
      */
     private FirestoreRecyclerAdapter setUpAdapter(FirebaseFirestore db){
-        Query query = db.collection("polls").whereEqualTo("isOpen",false);
+        Query query = db.collection("polls").whereEqualTo("isOpen",true);
 
 
 
@@ -77,47 +72,32 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull PollViewHolderStudent holder, int pos, final Poll model) {
 
-                //TODO Fix the time issue it keeps giving me the time in AST not ADT
-                /*
-                Calendar today = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("MM-DD-yyyy");
-                sdf.setTimeZone(TimeZone.getTimeZone("ADT"));
-                Date open = null;
-                try {
-                    open = sdf.parse(model.sDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                Calendar openDate = Calendar.getInstance();
-                openDate.setTime(open);
-
-                System.out.println(today.getTime()+"\n");
-                System.out.println(openDate.getTime()+"\n");
-
-                if(today.compareTo(openDate)>0)
-                    System.out.println("***************************   Its open\n\n");
-                else
-                    System.out.println("***************************   Its Not open\n\n");
-
-*/
-
                 holder.titleText.setText(model.title);
                 holder.viewBut.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), PollResultsActivity.class);
-                        intent.putExtra("poll", model);
-                        startActivity(intent);
+                        //if(!checkDatesIfOpen(model.sDate, model.eDate))
+                          //  finish();
 
+                        //else {
+                            Intent intent = new Intent(getApplicationContext(), PollResultsActivity.class);
+                            intent.putExtra("poll", model);
+                            startActivity(intent);
+                        //}
                     }
                 });
 
                 holder.voteProcess.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), VoteQuestionActivity.class);
-                        intent.putExtra("poll", model);
-                        startActivity(intent);
+                        if(!checkDatesIfOpen(model.sDate, model.eDate))
+                            finish();
+
+                        else {
+                            Intent intent = new Intent(getApplicationContext(), VoteQuestionActivity.class);
+                            intent.putExtra("poll", model);
+                            startActivity(intent);
+                        }
 
                     }
                 });
@@ -152,13 +132,44 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
         adapter.stopListening();
     }
 
+    /**
+     * A method to check the dates of the poll if its open or not to allow access for students
+     *
+     * @param s, its the start date of the poll
+     * @param e, its the end date of the poll
+     * @return true if the poll is open (start date is before today's date, close date is after
+     * today's date)
+     */
+    private boolean checkDatesIfOpen(String s, String e){
+        boolean isOpen = false;
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        Date open = null, close = null;
+        try {
+            open = sdf.parse(s);
+            close = sdf.parse(e);
+        } catch (Exception x) {
+            x.printStackTrace();
+        }
+        Calendar openDate = Calendar.getInstance();
+        openDate.setTime(open);
 
-    private void deleteBusiness()
-    {
-        //DocumentReference ref = database.collection("Canada Businesses").document(business.id);
-        //ref.delete();
-        //finishes the activity
-        finish();
+        Calendar closeDate = Calendar.getInstance();
+        closeDate.setTime(close);
 
+        if(today.compareTo(openDate)>0)
+            isOpen = true;
+
+        else
+            isOpen = false;
+
+        if(today.compareTo(closeDate)>0)
+            isOpen = false;
+
+        else
+            isOpen = true;
+
+        return isOpen;
     }
+
 }
