@@ -60,7 +60,7 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
      * @return
      */
     private FirestoreRecyclerAdapter setUpAdapter(FirebaseFirestore db){
-        Query query = db.collection("polls").whereEqualTo("isOpen",true);
+        Query query = db.collection("polls").whereEqualTo("isOpen",false);
 
 
 
@@ -76,23 +76,21 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
                 holder.viewBut.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //if(!checkDatesIfOpen(model.sDate, model.eDate))
-                          //  finish();
-
-                        //else {
                             Intent intent = new Intent(getApplicationContext(), PollResultsActivity.class);
                             intent.putExtra("poll", model);
                             startActivity(intent);
-                        //}
+
                     }
                 });
 
                 holder.voteProcess.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!checkDatesIfOpen(model.sDate, model.eDate))
-                            finish();
+                        if(!checkDatesIfOpen(model.sDate, model.eDate)) {
+                            Intent intent = new Intent(getApplicationContext(), outOfDatePage.class);
+                            startActivity(intent);
 
+                        }
                         else {
                             Intent intent = new Intent(getApplicationContext(), VoteQuestionActivity.class);
                             intent.putExtra("poll", model);
