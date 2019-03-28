@@ -165,6 +165,7 @@ public class EditPollActivity extends AppCompatActivity {
 
         // If this Poll has no ID then we must be creating a new object here.
         if(poll.id == null) {
+            poll.isOpen = true;
             DocumentReference docRef = database.collection("polls").document();
             poll.id = docRef.getId();
             docRef.set(poll);
