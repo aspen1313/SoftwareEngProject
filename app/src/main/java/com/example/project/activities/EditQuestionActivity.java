@@ -101,8 +101,7 @@ public class EditQuestionActivity extends AppCompatActivity {
      * Saves the Question object and returns to previous activity.
      */
     private void saveButtonHandler(){
-        e = (Poll) getIntent().getSerializableExtra("poll");
-        e.isOpen = true;
+
         question.title = questionName.getText().toString();
         question.options = new ArrayList<>(Collections.nCopies(optionsView.getChildCount(), ""));
 
