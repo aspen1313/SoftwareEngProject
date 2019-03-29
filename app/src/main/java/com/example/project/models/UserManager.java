@@ -1,5 +1,7 @@
 package com.example.project.models;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class UserManager {
     private static User user;
 
@@ -8,10 +10,14 @@ public class UserManager {
     }
 
     public static void logout(){
-        return;
+        user = null;
     }
 
     public static User getUser(){
         return user;
+    }
+
+    public static User registerUser(String username, boolean isAdmin){
+        return null;
     }
 }
