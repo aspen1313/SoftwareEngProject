@@ -34,7 +34,6 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_polls_student);
 
-
         pollView = findViewById(R.id.studentRecycler);
         database = FirebaseFirestore.getInstance();
         adapter = setUpAdapter(database);
@@ -86,7 +85,7 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
                 holder.voteProcess.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!checkDatesIfOpen(model.sDate, model.eDate)) {
+                        if((!checkDatesIfOpen(model.sDate, model.eDate)) || (model.isOpen==false)) {
                             Intent intent = new Intent(getApplicationContext(), outOfDatePage.class);
                             startActivity(intent);
 
@@ -138,9 +137,9 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
      * @return true if the poll is open (start date is before today's date, close date is after
      * today's date)
      */
-    private boolean checkDatesIfOpen(String s, String e){
+    public static boolean checkDatesIfOpen(String s, String e){
         boolean isOpen = false;
-        Calendar today = Calendar.getInstance();
+   /*     Calendar today = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         Date open = null, close = null;
         try {
@@ -167,7 +166,6 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
         else
             isOpen = true;
 
-        return isOpen;
+*/        return isOpen;
     }
-
 }
