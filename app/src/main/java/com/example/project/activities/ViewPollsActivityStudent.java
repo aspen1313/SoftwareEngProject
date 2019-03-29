@@ -139,7 +139,7 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
      */
     public static boolean checkDatesIfOpen(String s, String e){
         boolean isOpen = false;
-   /*     Calendar today = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         Date open = null, close = null;
         try {
@@ -166,6 +166,6 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
         else
             isOpen = true;
 
-*/        return isOpen;
+        return isOpen;
     }
 }
