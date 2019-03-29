@@ -9,11 +9,17 @@ import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+/**
+ * Tests the basic functions of the UserManager
+ */
 public class UserManagerTests {
     private static final String USERNAME = "dummyUsername";
     private static final String FIRESTORE_ID = "12345QWERTY";
     private User dummyUser;
 
+    /**
+     * Sets up a dummy user class to use to test
+     */
     @Before
     public void runBefore(){
         dummyUser = new User(FIRESTORE_ID, USERNAME, true);

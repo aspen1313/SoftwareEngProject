@@ -1,15 +1,30 @@
 package com.example.project.models;
 
+/**
+ * UserManager follows the singleton pattern to ensure that there is only ever one instance of user
+ */
 public class UserManager {
     private static User user;
 
-    public static void login(User user){
+    /**
+     * takes a User and assigns them to the static user variable.
+     * @param u
+     */
+    public static void login(User u){
+        user = u;
     }
 
+    /**
+     * un-assigns the user class.
+     */
     public static void logout(){
         user = null;
     }
 
+    /**
+     * returns the user instance.
+     * @return
+     */
     public static User getUser(){
         return user;
     }
