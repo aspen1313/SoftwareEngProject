@@ -83,6 +83,15 @@ public class ViewPollsActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                holder.viewAdmin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), PollResultsActivity.class);
+                        intent.putExtra("poll", model);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override

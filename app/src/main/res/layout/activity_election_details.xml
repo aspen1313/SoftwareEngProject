@@ -13,31 +13,25 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="45dp"
         android:text="Election Details"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/electionName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/electionName"
         android:layout_width="197dp"
         android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="484dp"
         android:hint="Election Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/electionDetailsView"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="116dp" />
 
     <TextView
         android:id="@+id/openDateView"
@@ -49,6 +43,7 @@
         android:layout_marginBottom="8dp"
         android:fitsSystemWindows="false"
         android:hint="Open Date"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -65,6 +60,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:hint="End Date"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
