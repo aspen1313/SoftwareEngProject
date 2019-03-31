@@ -13,25 +13,29 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="8dp"
         android:text="Election Details"
         android:textAlignment="center"
         android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/electionName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.043" />
 
     <TextView
         android:id="@+id/electionName"
         android:layout_width="197dp"
         android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
         android:hint="Election Name"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="116dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/electionDetailsView" />
 
     <TextView
         android:id="@+id/openDateView"

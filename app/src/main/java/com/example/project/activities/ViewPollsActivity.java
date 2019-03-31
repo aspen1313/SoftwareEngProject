@@ -66,6 +66,7 @@ public class ViewPollsActivity extends AppCompatActivity {
             @Override
             public void onBindViewHolder(PollViewHolder holder, int position, final Poll model){
                 holder.text.setText(model.title);
+                holder.votesTotal.setText(model.getTotalVotes()+"");
                 holder.button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
