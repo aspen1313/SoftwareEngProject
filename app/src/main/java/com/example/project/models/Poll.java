@@ -136,10 +136,10 @@ public class Poll extends APoll implements Serializable {
      */
     public int getTotalVotes(){
         int total=0;
-       /* int length = questions.get(0).votes.size();
+        int length = questions.get(0).votes.size();
         for (int i=0;i<length;i++)
             total += questions.get(0).votes.get(i);
-        */return total;
+        return total;
     }
 
 }
