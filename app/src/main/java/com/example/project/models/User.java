@@ -8,7 +8,7 @@ import java.util.HashSet;
  */
 public class User implements IUser, Serializable {
 
-    private String id;
+    public String id;
     private String username;
     private HashSet<String> voteSet;
     private boolean isAdmin;

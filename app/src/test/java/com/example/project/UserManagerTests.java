@@ -1,7 +1,7 @@
 package com.example.project;
 
+import com.example.project.managers.UserManager;
 import com.example.project.models.User;
-import com.example.project.models.UserManager;
 
 import org.junit.Before;
 import org.junit.Test;

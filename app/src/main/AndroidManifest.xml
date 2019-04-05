@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.activity_poll_question"></activity>
+        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.activity_poll_question" />
         <activity android:name=".activities.QuestionDetailView" />
         <activity android:name=".activities.PollResultsActivity" />
         <activity android:name=".activities.ViewPollsActivityStudent" />
         <activity android:name=".activities.ViewPollsActivity" />
         <activity android:name=".activities.EditPollActivity" />
         <activity android:name=".activities.EditQuestionActivity" />
-        <activity android:name=".activities.VoteQuestionActivity"/>
+        <activity android:name=".activities.VoteQuestionActivity" />
         <activity android:name=".VotingBallots" />
         <activity android:name=".StudentPage" />
         <activity android:name=".ElectionDetails" />

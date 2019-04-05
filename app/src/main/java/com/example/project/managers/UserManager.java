@@ -1,4 +1,6 @@
-package com.example.project.models;
+package com.example.project.managers;
+
+import com.example.project.models.User;
 
 /**
  * UserManager follows the singleton pattern to ensure that there is only ever one instance of user
