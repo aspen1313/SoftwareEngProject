@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.outOfDatePage"></activity>
         <activity android:name=".activities.activity_poll_question" />
         <activity android:name=".activities.QuestionDetailView" />
         <activity android:name=".activities.PollResultsActivity" />
