@@ -1,5 +1,6 @@
 package com.example.project;
 
+import com.example.project.models.Poll;
 import com.example.project.models.Question;
 
 import org.junit.Rule;
@@ -100,4 +101,7 @@ public class QuestionTests {
         q.votes.set(0,20);
         assertEquals(q.getMostPopularOption(), "Option 1");
     }
+
+
+
 }
