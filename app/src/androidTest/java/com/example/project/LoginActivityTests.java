@@ -13,12 +13,14 @@ import org.junit.Test;
 
 import androidx.test.rule.ActivityTestRule;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 /**
  * Tests the behaviour of the LoginActivity
@@ -77,7 +79,8 @@ public class LoginActivityTests {
     @Test
     public void loginButtonDoesNotLoginUserIfDoesNotExist(){
         rule.launchActivity(intent);
-        onView(withId(R.id.userText)).perform(typeText(NONEXISTENT_USERNAME));
+        onView(withId(R.id.userText)).perform(typeText(NONEXISTENT_USERNAME))
+                .perform(closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
         assertNull(UserManager.getUser());
         rule.finishActivity();
@@ -89,7 +92,8 @@ public class LoginActivityTests {
     @Test
     public void loginButtonCorrectlyLogsInValidUser(){
         rule.launchActivity(intent);
-        onView(withId(R.id.userText)).perform(typeText(VALID_USERNAME));
+        onView(withId(R.id.userText)).perform(typeText(VALID_USERNAME))
+                .perform(closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
         assertNotNull(UserManager.getUser());
         rule.finishActivity();
@@ -101,7 +105,8 @@ public class LoginActivityTests {
     @Test
     public void registerButtonDoesNotOverwriteExistingUser(){
         rule.launchActivity(intent);
-        onView(withId(R.id.userText)).perform(typeText(VALID_USERNAME));
+        onView(withId(R.id.userText)).perform(typeText(VALID_USERNAME))
+                .perform(closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
         assertNull(UserManager.getUser());
         rule.finishActivity();
@@ -113,7 +118,8 @@ public class LoginActivityTests {
     @Test
     public void registerButtonCorrectlyRegistersNonexistentUser(){
         rule.launchActivity(intent);
-        onView(withId(R.id.userText)).perform(typeText(NONEXISTENT_USERNAME));
+        onView(withId(R.id.userText)).perform(typeText(NONEXISTENT_USERNAME))
+                .perform(closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
         assertNotNull(UserManager.getUser());
         rule.finishActivity();
