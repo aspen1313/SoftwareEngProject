@@ -66,6 +66,7 @@ public class ViewPollsActivity extends AppCompatActivity {
             @Override
             public void onBindViewHolder(PollViewHolder holder, int position, final Poll model){
                 holder.text.setText(model.title);
+                holder.votesTotal.setText(model.getTotalVotes()+"");
                 holder.button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -79,6 +80,15 @@ public class ViewPollsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), ElectionDetails.class);
+                        intent.putExtra("poll", model);
+                        startActivity(intent);
+                    }
+                });
+
+                holder.viewAdmin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), PollResultsActivity.class);
                         intent.putExtra("poll", model);
                         startActivity(intent);
                     }
