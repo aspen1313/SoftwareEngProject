@@ -3,8 +3,10 @@ package com.example.project.activities;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.project.R;
@@ -25,8 +27,13 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
     private Button logoutButton;
+    private Button deleteButton;
 
+    private CheckBox adminCheckbox;
+
+    private TextView currentUser;
     private TextView usernameText;
+
     private FirebaseFirestore db;
 
     /**
@@ -38,14 +45,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Here we set the database to the serializable extra or the FirebaseFirestore instance
-        // depending on whether or not a db was passed as an argument. Used as a way to test.
         db = FirebaseFirestore.getInstance();
 
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
-        usernameText = findViewById(R.id.userText);
         logoutButton = findViewById(R.id.logoutButton);
+        deleteButton = findViewById(R.id.deleteUserButton);
+
+        usernameText = findViewById(R.id.userText);
+        adminCheckbox = findViewById(R.id.adminCheckbox);
+        currentUser = findViewById(R.id.currentUserText);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +76,17 @@ public class LoginActivity extends AppCompatActivity {
                 logoutButtonHandler();
             }
         });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteButtonHandler();
+            }
+        });
+
+        if(UserManager.getUser() != null){
+            currentUser.setText("Current User: " + UserManager.getUser().toString());
+        }
     }
 
     /**
@@ -84,12 +104,29 @@ public class LoginActivity extends AppCompatActivity {
                         DocumentSnapshot docSnapshot = querySnapshot.getDocuments().get(0);
                         loginCallback(docSnapshot.toObject(User.class));
                     }
+                    else{
+                        loginFailedCallback();
+                    }
                 }
             }
         });
     }
+
+    /**
+     * Called when login succeeds, logs in the user returned by the FireStore.
+     * @param user
+     */
     private void loginCallback(User user){
         UserManager.login(user);
+        currentUser.setText("Current User: " + UserManager.getUser());
+    }
+
+    /**
+     * Notifies the user that login failed.
+     */
+    private void loginFailedCallback(){
+        Log.d("DBG", "Login failed.");
+        currentUser.setText("ERROR: LOGIN FAILED");
     }
 
     /**
@@ -97,34 +134,73 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void registerButtonHandler(){
         final String username = usernameText.getText().toString();
-        // TODO Fix all registering users being admins.
-        final boolean isAdmin = true;
+        final boolean isAdmin = adminCheckbox.isChecked();
 
         db.collection("users").whereEqualTo("username", username).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(!task.isSuccessful()){
-                            registerButtonCallback(username, isAdmin);
+                        if(task.isSuccessful()){
+                            QuerySnapshot snapshot = task.getResult();
+                            if(snapshot.isEmpty()){
+                                registerButtonCallback(username, isAdmin);
+                            }else{
+                                failedRegisterCallback(username);
+                            }
                         }
                     }
                 });
-        DocumentReference ref = db.collection("users").document();
-        ref.getId();
     }
+
+    /**
+     * Handles the logic for when we can register a new user. Essentially just contacts FireStore
+     * and adds the new user.
+     * @param username
+     * @param isAdmin
+     */
     private void registerButtonCallback(String username, boolean isAdmin){
         DocumentReference ref = db.collection("users").document();
         String id = ref.getId();
         User user = new User(id, username, isAdmin);
         ref.set(user);
         UserManager.login(user);
-        finish();
+        currentUser.setText("Current User: " + UserManager.getUser());
     }
 
     /**
-     * Handles the logout logic for our logout button
+     * Gives the user feedback that their login failed.
+     */
+    private void failedRegisterCallback(String username){
+        Log.d("DBG", "Unable to create user with username: " + username);
+        currentUser.setText("ERROR: Registration Failed");
+    }
+
+    /**
+     * Handles the logout logic for our logout button.
      */
     private void logoutButtonHandler(){
+        UserManager.logout();
+        currentUser.setText("NO USER LOGGED IN");
+    }
 
+    /**
+     * Deletes the user currently logged in.
+     */
+    private void deleteButtonHandler(){
+        User u = UserManager.getUser();
+        if(u != null){
+            DocumentReference ref = db.collection("users").document(u.getId());
+            ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    deleteCallback();
+                }
+            });
+        }
+    }
+
+    private void deleteCallback(){
+        UserManager.logout();
+        currentUser.setText("NO USER LOGGED IN");
     }
 }
