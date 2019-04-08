@@ -1,6 +1,7 @@
 package com.example.project;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.project.activities.LoginActivity;
 import com.example.project.managers.UserManager;
@@ -14,6 +15,7 @@ import org.junit.Test;
 import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -26,6 +28,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
  * Tests the behaviour of the LoginActivity
  */
 public class LoginActivityTests {
+
     /**
      * This rule allows us to start up the activity independently of any other for testing.
      */
@@ -36,6 +39,7 @@ public class LoginActivityTests {
     private Intent intent;
     private final String NONEXISTENT_USERNAME = "fakeBoi";
     private  final String VALID_USERNAME = "realBoi";
+    private final String ADMIN_USERNAME = "Admin2_Electric_Boogaloo";
 
     /**
      * Runs before our tests and sets up the activity for us.
@@ -45,6 +49,9 @@ public class LoginActivityTests {
         intent = new Intent();
     }
 
+    /**
+     * Ensures that the user is logged out when the tests finish.
+     */
     @After
     public void teardown(){
         UserManager.logout();
@@ -55,6 +62,7 @@ public class LoginActivityTests {
      */
     @Test
     public void logoutButtonDoesNotCatastrophicallyFailWhenNoUserLoggedIn(){
+        UserManager.logout();
         rule.launchActivity(intent);
         onView(withId(R.id.logoutButton)).perform(click());
         assertNull(UserManager.getUser());
@@ -66,6 +74,7 @@ public class LoginActivityTests {
      */
     @Test
     public void logoutButtonCorrectlyLogsOutUser(){
+        UserManager.logout();
         UserManager.login(new User("123", "Bob_Loblaw", false));
         rule.launchActivity(intent);
         onView(withId(R.id.logoutButton)).perform(click());
@@ -78,6 +87,7 @@ public class LoginActivityTests {
      */
     @Test
     public void loginButtonDoesNotLoginUserIfDoesNotExist(){
+        UserManager.logout();
         rule.launchActivity(intent);
         onView(withId(R.id.userText)).perform(typeText(NONEXISTENT_USERNAME))
                 .perform(closeSoftKeyboard());
@@ -91,10 +101,17 @@ public class LoginActivityTests {
      */
     @Test
     public void loginButtonCorrectlyLogsInValidUser(){
+        UserManager.logout();
         rule.launchActivity(intent);
         onView(withId(R.id.userText)).perform(typeText(VALID_USERNAME))
                 .perform(closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            Log.d("ERROR", e.toString());
+        }
+
         assertNotNull(UserManager.getUser());
         rule.finishActivity();
     }
@@ -104,6 +121,7 @@ public class LoginActivityTests {
      */
     @Test
     public void registerButtonDoesNotOverwriteExistingUser(){
+        UserManager.logout();
         rule.launchActivity(intent);
         onView(withId(R.id.userText)).perform(typeText(VALID_USERNAME))
                 .perform(closeSoftKeyboard());
@@ -117,11 +135,58 @@ public class LoginActivityTests {
      */
     @Test
     public void registerButtonCorrectlyRegistersNonexistentUser(){
+        UserManager.logout();
         rule.launchActivity(intent);
         onView(withId(R.id.userText)).perform(typeText(NONEXISTENT_USERNAME))
                 .perform(closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            Log.d("ERROR", e.toString());
+        }
         assertNotNull(UserManager.getUser());
+
+        // deletes the user so subsequent runs don't fail.
+        onView(withId(R.id.deleteUserButton)).perform(click());
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            Log.d("ERROR", e.toString());
+        }
+
+        assertNull(UserManager.getUser());
+
+        rule.finishActivity();
+    }
+
+    /**
+     * Ensures that when the admin check-box is selected that the corresponding user is an admin.
+     */
+    @Test
+    public void adminUserCreatedCorrectly(){
+        UserManager.logout();
+        rule.launchActivity(intent);
+        onView(withId(R.id.userText))
+                .perform(typeText(ADMIN_USERNAME))
+                .perform(closeSoftKeyboard());
+        onView(withId(R.id.adminCheckbox)).perform(click());
+        onView(withId(R.id.registerButton)).perform(click());
+        try{
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException e){
+            Log.d("ERROR", e.toString());
+        }
+        assertNotNull(UserManager.getUser());
+        assertTrue(UserManager.getUser().isAdmin());
+        onView(withId(R.id.deleteUserButton)).perform(click());
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            Log.d("ERROR", e.toString());
+        }
+        assertNull(UserManager.getUser());
         rule.finishActivity();
     }
 }
