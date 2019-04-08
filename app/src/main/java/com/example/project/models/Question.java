@@ -94,6 +94,10 @@ public class Question implements Serializable {
         return results;
     }
 
+    /**
+     * Returns the most popular of all of our options.
+     * @return
+     */
     public String getMostPopularOption(){
         int highestCount = -1;
         String currentOption = "";

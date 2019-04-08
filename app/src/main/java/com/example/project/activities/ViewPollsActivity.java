@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.project.ElectionDetails;
+import com.example.project.PollDetails;
 import com.example.project.viewAdapters.PollViewHolder;
 import com.example.project.R;
 import com.example.project.models.Poll;
@@ -20,7 +20,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
 /**
- * A very simple view for the Polls using the FirestoreRecyclerAdapter.
+ * A very simple view for the Polls using the FirestoreRecyclerAdapter as an Admin.
  */
 public class ViewPollsActivity extends AppCompatActivity {
     RecyclerView pollView;
@@ -63,6 +63,7 @@ public class ViewPollsActivity extends AppCompatActivity {
                 .build();
 
         FirestoreRecyclerAdapter adapter = new FirestoreRecyclerAdapter<Poll, PollViewHolder>(options){
+            // We override this internally so that we can set up our view holder.
             @Override
             public void onBindViewHolder(PollViewHolder holder, int position, final Poll model){
                 holder.text.setText(model.title);
@@ -79,7 +80,7 @@ public class ViewPollsActivity extends AppCompatActivity {
                 holder.edit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), ElectionDetails.class);
+                        Intent intent = new Intent(getApplicationContext(), PollDetails.class);
                         intent.putExtra("poll", model);
                         startActivity(intent);
                     }

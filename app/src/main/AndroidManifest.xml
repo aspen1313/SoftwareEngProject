@@ -19,9 +19,8 @@
         <activity android:name=".activities.EditPollActivity" />
         <activity android:name=".activities.EditQuestionActivity" />
         <activity android:name=".activities.VoteQuestionActivity" />
-        <activity android:name=".VotingBallots" />
         <activity android:name=".StudentPage" />
-        <activity android:name=".ElectionDetails" />
+        <activity android:name=".PollDetails" />
         <activity android:name=".AdminPage" />
         <activity android:name=".MainActivity">
             <intent-filter>

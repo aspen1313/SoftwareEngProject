@@ -22,6 +22,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 
+/**
+ * A simple activity for viewing polls as a student.
+ */
 public class ViewPollsActivityStudent extends AppCompatActivity {
 
     RecyclerView pollView;

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.example.project.R;
 
 /**
- * View holder for the Poll view.
+ * Basic view holder for the Poll objects. Should be used by admin views only.
  */
 public class PollViewHolder extends RecyclerView.ViewHolder{
     public TextView text;

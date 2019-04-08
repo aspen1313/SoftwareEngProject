@@ -199,6 +199,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Ensures that once the data has been deleted from the FireStore, that the user is logged out
+     * and that the text for which user is logged in gets updated.
+     */
     private void deleteCallback(){
         UserManager.logout();
         currentUser.setText("NO USER LOGGED IN");

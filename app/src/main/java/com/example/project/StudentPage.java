@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import com.example.project.activities.ViewPollsActivityStudent;
 
+/**
+ * Allows students to perform their functions. Currently just viewing the polls.
+ */
 public class StudentPage extends AppCompatActivity {
 
     private Button view;

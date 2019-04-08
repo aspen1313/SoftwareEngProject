@@ -14,6 +14,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Tests the User class to ensure functionality.
+ */
 public class UserTests {
     private IUser user;
     private IUser adminUser;
@@ -76,6 +79,6 @@ public class UserTests {
 
     @Test
     public void getFireStoreIDReturnsCorrectID(){
-        assertEquals(FIRESTORE_ID, user.getFirestoreId());
+        assertEquals(FIRESTORE_ID, user.getId());
     }
 }

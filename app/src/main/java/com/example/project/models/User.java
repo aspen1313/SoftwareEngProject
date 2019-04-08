@@ -29,6 +29,18 @@ public class User implements IUser, Serializable {
     }
 
     /**
+     * A default constructor for compatibility with deserialization.
+     */
+    private User(){
+
+    }
+
+    @Override
+    public String toString(){
+        return username;
+    }
+
+    /**
      * Returns the isAdmin boolean.
      * @return
      */
@@ -61,7 +73,7 @@ public class User implements IUser, Serializable {
      * @return
      */
     @Override
-    public String getFirestoreId() {
+    public String getId() {
         return id;
     }
 

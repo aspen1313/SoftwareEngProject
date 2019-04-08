@@ -13,6 +13,11 @@ import com.example.project.models.Question;
 
 import java.util.ArrayList;
 
+/**
+ * Recycler view adapter for use with question objects for the admin view.
+ * ie we can edit the question by clicking the edit button on the view holders used by this
+ * adapter.
+ */
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>{
 
     private ArrayList<Question> mDataset;
