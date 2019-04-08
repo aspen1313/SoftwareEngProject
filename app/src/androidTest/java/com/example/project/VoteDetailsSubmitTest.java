@@ -20,15 +20,19 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests QuestionDetailView
  */
 public class VoteDetailsSubmitTest {
+    private Question question;
+    private Question multiQuestion;
     private static final String QUESTION_TITLE = "Dummy Title";
     private static final int N_OPTIONS = 5;
 
     private Intent intent;
+    private Intent multiIntent;
     ActivityTestRule<activity_poll_question > rule
             = new ActivityTestRule<>(activity_poll_question .class, false, false);
     private ArrayList<String> options;
@@ -42,15 +46,15 @@ public class VoteDetailsSubmitTest {
         for(int i=0; i<N_OPTIONS; i++){
             options.add("Option Number " + (i+1));
         }
-        Question question = Question.getNewQuestion(QUESTION_TITLE, options);
-
-        Random rand = new Random();
-        for(int i=0; i<N_OPTIONS; i++){
-            question.votes.set(i, rand.nextInt(500));
-        }
-
+        question = Question.getNewQuestion(QUESTION_TITLE, options);
         intent = new Intent();
         intent.putExtra("question", question);
+
+        multiQuestion = Question.getNewQuestion(QUESTION_TITLE, options);
+        multiQuestion.setQuestionState("Multiple");
+        multiIntent = new Intent();
+        multiIntent.putExtra("question", multiQuestion);
+
     }
 
     /**
@@ -88,6 +92,19 @@ public class VoteDetailsSubmitTest {
     public void CancelFunctions(){
         rule.launchActivity(intent);
         onView(withId(R.id.backbutton)).perform(click());
+        rule.finishActivity();
+    }
+
+    /**
+     * Tests to make sure votes are counted correctly for check boxes
+     */
+    @Test
+    public void CheckboxFunctions(){
+        rule.launchActivity(multiIntent);
+        onView(withId(0)).perform(click());
+        onView(withId(1)).perform(click());
+        assertEquals(1, (int)Question.getQuestionObject().getResults().get("Option Number 1"));
+        assertEquals(1, (int)Question.getQuestionObject().getResults().get("Option Number 2"));
         rule.finishActivity();
     }
 }

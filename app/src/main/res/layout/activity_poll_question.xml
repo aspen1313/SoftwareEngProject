@@ -41,7 +41,7 @@
 
     <RadioGroup
         android:id="@+id/questionRadioGoup"
-        android:layout_width="263dp"
+        android:layout_width="267dp"
         android:layout_height="486dp"
         android:layout_marginStart="74dp"
         android:layout_marginTop="37dp"
