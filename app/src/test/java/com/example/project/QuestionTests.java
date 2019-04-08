@@ -100,4 +100,18 @@ public class QuestionTests {
         q.votes.set(0,20);
         assertEquals(q.getMostPopularOption(), "Option 1");
     }
+
+    @Test
+    public void questionStateSingle(){
+        question = question("Question");
+        question.setQuestionState("Single");
+        assertEquals(question.getQuestionState(), "Single");
+    }
+
+    @Test
+    public void questionStateMulti(){
+        question = question("Question");
+        question.setQuestionState("Multi");
+        assertEquals(question.getQuestionState(), "Multi");
+    }
 }
