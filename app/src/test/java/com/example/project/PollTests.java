@@ -71,18 +71,4 @@ public class PollTests {
         assertEquals((int)results.get("Test Question 1").get("Option 1"), 5);
         assertEquals((int)results.get("Test Question 1").get("Option 2"), 10);
     }
-
-    @Test
-    public void testTotalNumberOFVotes(){
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Option 1");
-        options.add("Option 2");
-        Question question = Question.getNewQuestion("Test Question 1", options);
-        Poll poll = Poll.getNewElection("Test Poll", question);
-
-        poll.questions.get(0).votes.set(0, 5);
-        poll.questions.get(0).votes.set(1, 5);
-        assertEquals(poll.getTotalVotes(),10);
-
-    }
 }

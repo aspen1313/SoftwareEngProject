@@ -1,6 +1,5 @@
 package com.example.project;
 
-import com.example.project.models.Poll;
 import com.example.project.models.Question;
 
 import org.junit.Rule;

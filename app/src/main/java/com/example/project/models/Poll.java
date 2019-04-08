@@ -15,7 +15,6 @@ public class Poll extends APoll implements Serializable {
     public ArrayList<Question> questions;
     public String sDate;
     public String eDate;
-    public int totalVotes;
 
     /**
      * Private constructor for serialization compatibility.
@@ -33,11 +32,6 @@ public class Poll extends APoll implements Serializable {
         eDate = e;
     }
 
-    /**
-     * A constructor for creating poll with questions and title
-     * @param title
-     * @param questions
-     */
     private Poll(String title, ArrayList<Question> questions){
         isOpen = true;
         this.title = title;
@@ -49,7 +43,6 @@ public class Poll extends APoll implements Serializable {
         questions = new ArrayList<>();
         questions.add(question);
     }
-
 
     /**
      * Checks the parameters and creates a new Poll with multiple questions.
@@ -126,20 +119,5 @@ public class Poll extends APoll implements Serializable {
        sDate = openDate;
     }
 
-
-    /**
-     * Allows other classes to get the total number of voters for an election
-     * (Assuming the user must answer all the questions to be able to vote, therefore we
-     * only get the total number of votes for the first question (the total of voters for all the
-     * options.
-     * @return total
-     */
-    public int getTotalVotes(){
-        int total=0;
-        int length = questions.get(0).votes.size();
-        for (int i=0;i<length;i++)
-            total += questions.get(0).votes.get(i);
-        return total;
-    }
 
 }
