@@ -53,6 +53,7 @@ public class EditPollActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
 
         Button addNewItemButton = findViewById(R.id.addNewQuestionButton);
+        Button addNewMultiItemButton = findViewById(R.id.addNewMultiQuestionButton);
         Button removeItemButton = findViewById(R.id.removeQuestionButton);
         Button saveButton = findViewById(R.id.saveButton);
         Button cancelButton = findViewById(R.id.cancelButton);
@@ -66,6 +67,11 @@ public class EditPollActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addButtonHandler();
+            }
+        });
+        addNewMultiItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {addMultiButtonHandler();
             }
         });
         removeItemButton.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +95,7 @@ public class EditPollActivity extends AppCompatActivity {
     }
 
     /**
-     * Sets up our recycler view
+     * Sets up our recycler view using our custom QuestionAdapter for display.
      */
     private void configureRecyclerView(){
         recyclerView = findViewById(R.id.recyclerView);
@@ -128,12 +134,29 @@ public class EditPollActivity extends AppCompatActivity {
     }
 
     /**
-     * Adds a new item to the recycler view.
+     * Adds a new item to the recycler view for a question where you can select a single option.
      */
     private void addButtonHandler(){
         ArrayList<String> options = new ArrayList<>();
         options.add("Default Option");
         Question q = Question.getNewQuestion("Default Title", options);
+        q.setQuestionState("Single");
+
+        QuestionAdapter adapter = (QuestionAdapter)recyclerView.getAdapter();
+        if(adapter !=null){
+            dataSet.add(q);
+            adapter.notifyItemInserted(dataSet.size() - 1);
+        }
+    }
+
+    /**
+     * Adds a new item to the recycler view for a question where you can select multiple options.
+     */
+    private void addMultiButtonHandler(){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Default Option");
+        Question q = Question.getNewQuestion("Default Title", options);
+        q.setQuestionState("Multiple");
 
         QuestionAdapter adapter = (QuestionAdapter)recyclerView.getAdapter();
         if(adapter !=null){
@@ -167,6 +190,7 @@ public class EditPollActivity extends AppCompatActivity {
         if(poll.id == null) {
             DocumentReference docRef = database.collection("polls").document();
             poll.id = docRef.getId();
+            poll.isOpen = true;
             docRef.set(poll);
         }
         else{

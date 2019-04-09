@@ -11,14 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.project.R;
-import com.example.project.StudentPage;
 import com.example.project.models.Poll;
 import com.example.project.viewAdapters.PollViewHolderStudent;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
+
+/**
+ * A simple activity for viewing polls as a student.
+ */
 public class ViewPollsActivityStudent extends AppCompatActivity {
 
     RecyclerView pollView;
@@ -30,7 +36,6 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_polls_student);
-
 
         pollView = findViewById(R.id.studentRecycler);
         database = FirebaseFirestore.getInstance();
@@ -57,7 +62,9 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
      * @return
      */
     private FirestoreRecyclerAdapter setUpAdapter(FirebaseFirestore db){
-        Query query = db.collection("polls");
+        Query query = db.collection("polls");//.whereEqualTo("isOpen",true);
+
+
 
         FirestoreRecyclerOptions<Poll> options = new FirestoreRecyclerOptions.Builder<Poll>()
                 .setQuery(query, Poll.class)
@@ -66,13 +73,14 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
         FirestoreRecyclerAdapter adapter1 = new FirestoreRecyclerAdapter<Poll, PollViewHolderStudent>(options){
             @Override
             protected void onBindViewHolder(@NonNull PollViewHolderStudent holder, int pos, final Poll model) {
+
                 holder.titleText.setText(model.title);
                 holder.viewBut.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), PollResultsActivity.class);
-                        intent.putExtra("poll", model);
-                        startActivity(intent);
+                            Intent intent = new Intent(getApplicationContext(), PollResultsActivity.class);
+                            intent.putExtra("poll", model);
+                            startActivity(intent);
 
                     }
                 });
@@ -80,9 +88,16 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
                 holder.voteProcess.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), VoteQuestionActivity.class);
-                        intent.putExtra("poll", model);
-                        startActivity(intent);
+                        if((!checkDatesIfOpen(model.sDate, model.eDate)) || (model.isOpen==false)) {
+                            Intent intent = new Intent(getApplicationContext(), outOfDatePage.class);
+                            startActivity(intent);
+
+                        }
+                        else {
+                            Intent intent = new Intent(getApplicationContext(), VoteQuestionActivity.class);
+                            intent.putExtra("poll", model);
+                            startActivity(intent);
+                        }
 
                     }
                 });
@@ -115,5 +130,34 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
     protected void onStop(){
         super.onStop();
         adapter.stopListening();
+    }
+
+    /**
+     * A method to check the dates of the poll if its open or not to allow access for students
+     *
+     * @param s, its the start date of the poll
+     * @param e, its the end date of the poll
+     * @return true if the poll is open (start date is before today's date, close date is after
+     * today's date)
+     */
+    public static boolean checkDatesIfOpen(String s, String e){
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        Date open = null, close = null;
+
+        try {
+            open = sdf.parse(s);
+            close = sdf.parse(e);
+        } catch (Exception x) {
+            x.printStackTrace();
+            return false;
+        }
+        Calendar openDate = Calendar.getInstance();
+        openDate.setTime(open);
+
+        Calendar closeDate = Calendar.getInstance();
+        closeDate.setTime(close);
+
+        return (today.compareTo(closeDate) < 0 && today.compareTo(openDate) > 0);
     }
 }

@@ -124,16 +124,7 @@ public class VoteQuestionActivity extends AppCompatActivity {
     private void submitButtonHandler(){
         poll.questions = dataSet;
         poll.title = titleView.getText().toString();
-
-        // If this Poll has no ID then we must be creating a new object here.
-        if(poll.id == null) {
-            DocumentReference docRef = database.collection("polls").document();
-            poll.id = docRef.getId();
-            docRef.set(poll);
-        }
-        else{
-            database.collection("polls").document(poll.id).set(poll);
-        }
+        database.collection("polls").document(poll.id).set(poll);
         finish();
     }
 

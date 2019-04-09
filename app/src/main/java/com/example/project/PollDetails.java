@@ -9,16 +9,22 @@ import android.widget.TextView;
 import com.example.project.models.Poll;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class ElectionDetails extends AppCompatActivity {
+/**
+ * A page to allow the admin to manage the open and close dates for a Poll.
+ */
+public class PollDetails extends AppCompatActivity {
 
     private Button open;
     private Button close;
     private Button cancel;
     private Button freeze;
     FirebaseFirestore database;
-
     Poll e;
 
+    /**
+     * We ge tthe poll from the intent, and wire up our views.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +84,9 @@ public class ElectionDetails extends AppCompatActivity {
 
     }
 
+    /**
+     * Clicking the open button runs this handler. Here we open the poll.
+     */
     private void openHandler(){
         TextView changeOpen = (TextView) findViewById(R.id.openDateChange);
         String openDate = changeOpen.getText().toString();
@@ -86,6 +95,9 @@ public class ElectionDetails extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * We end the poll when the end button clicked.
+     */
     private void endHandler(){
         TextView changeEnd = (TextView) findViewById(R.id.closeDateChange);
         String closeDate = changeEnd.getText().toString();
@@ -94,6 +106,9 @@ public class ElectionDetails extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Freeze the election temporarily using the isOpen boolean inside each poll.
+     */
     private  void freezeHandler(){
         e.isOpen = false;
         database.collection("polls").document(e.id).set(e);

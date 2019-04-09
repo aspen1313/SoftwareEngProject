@@ -13,6 +13,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+/**
+ * Tests the Question class and its methods.
+ */
 public class QuestionTests {
     Question question;
 
@@ -39,6 +42,9 @@ public class QuestionTests {
 
     }
 
+    /**
+     * Checks to see if values exist for the question.
+     */
     @Test
     public void QuestionCreatedOnSensibleInput(){
 
@@ -46,6 +52,9 @@ public class QuestionTests {
         assertNotNull(question);
     }
 
+    /**
+     * Checks the getResults method.
+     */
     @Test
     public void VotesCountedProperlyOnQuestion(){
         question = question("Question");
@@ -54,6 +63,9 @@ public class QuestionTests {
         assertEquals((int)question.getResults().get("Option 2"), 9);
     }
 
+    /**
+     * Checks the vote method.
+     */
     @Test
     public void AddVoteOption1(){
         question = question("Question");
@@ -62,6 +74,9 @@ public class QuestionTests {
         assertEquals((int)question.getResults().get("Option 1"), 3);
     }
 
+    /**
+     * Checks the vote method.
+     */
     @Test
     public void AddVoteOption2(){
         question = question("Question");
@@ -70,6 +85,9 @@ public class QuestionTests {
         assertEquals((int)question.getResults().get("Option 2"), 10);
     }
 
+    /**
+     * Checks setQuestionObject method to replace an existing question object.
+     */
     @Test
     public void SettingQuestionDoesNotOverwriteExistingQuestion(){
         question = question("Question");
@@ -88,6 +106,9 @@ public class QuestionTests {
         assertNull(Question.getQuestionObject());
     }
 
+    /**
+     * Checks the getMostPopularOption method to retrieve the option with the most votes.
+     */
     @Test
     public void MostPopularOptionCorrectlyReturned(){
         ArrayList<String> options = new ArrayList<>();
@@ -99,5 +120,35 @@ public class QuestionTests {
         assertEquals(q.getMostPopularOption(), "Option 2");
         q.votes.set(0,20);
         assertEquals(q.getMostPopularOption(), "Option 1");
+    }
+
+    /**
+     * Checks the getQuestionState method to check if its "Single".
+     */
+    @Test
+    public void questionStateSingle(){
+        question = question("Question");
+        question.setQuestionState("Single");
+        assertEquals(question.getQuestionState(), "Single");
+    }
+
+    /**
+     * Checks the getQuestionState method to check if its "Multiple".
+     */
+    @Test
+    public void questionStateMulti(){
+        question = question("Question");
+        question.setQuestionState("Multiple");
+        assertEquals(question.getQuestionState(), "Multiple");
+    }
+
+    /**
+     * Checks the removeVote method.
+     */
+    @Test
+    public void removeVote(){
+        question = question("Question");
+        question.removeVote(1);
+        assertEquals((int)question.getResults().get("Option 2"), 8);
     }
 }
