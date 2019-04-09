@@ -24,7 +24,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 /**
- * Tests PollResultsActivity
+ * Tests activity_poll_view
  */
 public class VoteSubmitTest {
     @Rule
