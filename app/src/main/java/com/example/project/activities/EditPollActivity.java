@@ -190,6 +190,7 @@ public class EditPollActivity extends AppCompatActivity {
         if(poll.id == null) {
             DocumentReference docRef = database.collection("polls").document();
             poll.id = docRef.getId();
+            poll.isOpen = true;
             docRef.set(poll);
         }
         else{

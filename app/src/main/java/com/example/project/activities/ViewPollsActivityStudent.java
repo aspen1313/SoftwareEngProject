@@ -141,15 +141,16 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
      * today's date)
      */
     public static boolean checkDatesIfOpen(String s, String e){
-        boolean isOpen = false;
         Calendar today = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         Date open = null, close = null;
+
         try {
             open = sdf.parse(s);
             close = sdf.parse(e);
         } catch (Exception x) {
             x.printStackTrace();
+            return false;
         }
         Calendar openDate = Calendar.getInstance();
         openDate.setTime(open);
@@ -157,18 +158,6 @@ public class ViewPollsActivityStudent extends AppCompatActivity {
         Calendar closeDate = Calendar.getInstance();
         closeDate.setTime(close);
 
-        if(today.compareTo(openDate)>0)
-            isOpen = true;
-
-        else
-            isOpen = false;
-
-        if(today.compareTo(closeDate)>0)
-            isOpen = false;
-
-        else
-            isOpen = true;
-
-        return isOpen;
+        return (today.compareTo(closeDate) < 0 && today.compareTo(openDate) > 0);
     }
 }
