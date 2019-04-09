@@ -13,11 +13,18 @@ import com.example.project.models.Question;
 
 import java.util.ArrayList;
 
+/**
+ * The admin page allows the admin to navigate to either create polls or view polls.
+ */
 public class AdminPage extends AppCompatActivity {
 
     private Button create;
     private Button view;
 
+    /**
+     * Sets up our page with all its views, adds handlers to the buttons.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

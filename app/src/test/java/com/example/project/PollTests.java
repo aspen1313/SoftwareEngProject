@@ -10,6 +10,9 @@ import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests the Poll class and its methods.
+ */
 public class PollTests {
     Poll poll;
 

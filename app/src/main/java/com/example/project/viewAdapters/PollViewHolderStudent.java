@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.example.project.R;
 
+/**
+ * Basic view holder for Poll objects.
+ * This one lacks the admin functionality, and is used by students.
+ */
 public class PollViewHolderStudent extends RecyclerView.ViewHolder {
     public TextView titleText;
     public Button viewBut;

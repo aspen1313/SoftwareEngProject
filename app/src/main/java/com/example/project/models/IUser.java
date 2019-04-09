@@ -15,7 +15,7 @@ public interface IUser {
     String getUsername();
 
     /** Returns the ID that FireStore gave this object. */
-    String getFirestoreId();
+    String getId();
 
     /** Tells the User that it voted on a specific poll*/
     void votedOnPoll(String pollId);

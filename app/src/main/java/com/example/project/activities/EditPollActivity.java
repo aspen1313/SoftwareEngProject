@@ -89,7 +89,7 @@ public class EditPollActivity extends AppCompatActivity {
     }
 
     /**
-     * Sets up our recycler view
+     * Sets up our recycler view using our custom QuestionAdapter for display.
      */
     private void configureRecyclerView(){
         recyclerView = findViewById(R.id.recyclerView);

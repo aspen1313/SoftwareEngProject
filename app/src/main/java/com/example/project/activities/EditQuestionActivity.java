@@ -29,6 +29,9 @@ public class EditQuestionActivity extends AppCompatActivity {
     private Button removeItemButton;
     private TextView questionName;
 
+    /**
+     * Options view is the view that contains all our options.
+     */
     private LinearLayout optionsView;
     private Intent intent;
     private Question question;
@@ -120,9 +123,7 @@ public class EditQuestionActivity extends AppCompatActivity {
         resultIntent.putExtra("index", intent.getSerializableExtra("index"));
         setResult(Activity.RESULT_OK, resultIntent);
 
-
-
-        // For testing purposes ONLY
+        // For testing purposes
         Question.setQuestionObject(question);
         finish();
     }

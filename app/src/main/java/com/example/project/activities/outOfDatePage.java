@@ -8,8 +8,15 @@ import android.widget.Button;
 
 import com.example.project.R;
 
+/**
+ * A simple page that we show the user when they cannot vote because the Poll is not open due
+ * to the current date not being between its open and close dates.
+ */
 public class outOfDatePage extends AppCompatActivity {
 
+    /**
+     * We only need a back button and it corresponding handlers as this page just displays an error.
+     */
     private Button back;
 
     @Override
@@ -28,6 +35,7 @@ public class outOfDatePage extends AppCompatActivity {
 
 
     }
+
     /**
      * Go back to the Student view page
      */
