@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * Tests QuestionDetailView
+ * Tests activity_poll_question
  */
 public class VoteDetailsSubmitTest {
     private Question question;
