@@ -11,7 +11,7 @@ public class User implements IUser, Serializable {
     public String id;
     private String username;
     private HashSet<String> voteSet;
-    private boolean isAdmin;
+    private boolean admin;
 
     /**
      * Creating the user requires a firestore ID, username, and if the user being created is an
@@ -22,7 +22,7 @@ public class User implements IUser, Serializable {
      */
     public User(String fireStoreId, String username, boolean isAdmin){
         this.username = username;
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
         this.id = fireStoreId;
 
         voteSet = new HashSet<>();
@@ -41,12 +41,12 @@ public class User implements IUser, Serializable {
     }
 
     /**
-     * Returns the isAdmin boolean.
+     * Returns the admin boolean.
      * @return
      */
     @Override
     public boolean isAdmin() {
-        return isAdmin;
+        return admin;
     }
 
     /**
