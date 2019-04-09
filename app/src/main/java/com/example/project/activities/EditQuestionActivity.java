@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.project.R;
-import com.example.project.models.Poll;
 import com.example.project.models.Question;
 
 import java.util.ArrayList;
@@ -35,7 +34,6 @@ public class EditQuestionActivity extends AppCompatActivity {
     private LinearLayout optionsView;
     private Intent intent;
     private Question question;
-    Poll e;
 
     /**
      * Here we set our listeners to our event handlers, and get references to our UI elements.
@@ -104,7 +102,6 @@ public class EditQuestionActivity extends AppCompatActivity {
      * Saves the Question object and returns to previous activity.
      */
     private void saveButtonHandler(){
-
         question.title = questionName.getText().toString();
         question.options = new ArrayList<>(Collections.nCopies(optionsView.getChildCount(), ""));
 

@@ -29,10 +29,20 @@ public class Question implements Serializable {
     public ArrayList<Integer> votes;
 
     /**
+     * An indicator that determines whether the question can have a single selection option or
+     * mulitple so that the UI can be populated with radio buttons or check boxes.
+     * states: Single, Multiple
+     */
+    public String questionState;
+
+    /**
      * A static reference used to pass edited question objects to activities.
      */
     private static Question editingQuestion = null;
 
+    /**
+     * A reference to be used for adding votes to an specified index.
+     */
     private int voteIndex = -1;
 
     /**
@@ -50,6 +60,7 @@ public class Question implements Serializable {
         this.title = title;
         this.options = options;
         votes = new ArrayList<>(Collections.nCopies(options.size(), 0));
+        questionState = "Single";
     }
 
     /**
@@ -78,6 +89,16 @@ public class Question implements Serializable {
     }
 
     /**
+     * Allows a vote to be removed from the options arraylist at an index.
+     * Used for the check boxes.
+     * @param voteIndex
+     */
+    public void removeVote(int voteIndex){
+        if (voteIndex != -1)
+            votes.set(voteIndex, votes.get(voteIndex) - 1);
+    }
+
+    /**
      * Allows the results of a question to be retrieved.
      * @return
      */
@@ -95,7 +116,7 @@ public class Question implements Serializable {
     }
 
     /**
-     * Returns the most popular of all of our options.
+     * Returns the option that has the most votes in the question.
      * @return
      */
     public String getMostPopularOption(){
@@ -135,5 +156,23 @@ public class Question implements Serializable {
         Question q = editingQuestion;
         editingQuestion = null;
         return q;
+    }
+
+    /**
+     * Sets the questionState for a question to determine if you can have a single or mulitple
+     * selection options.
+     * example: Single, Multiple.
+     * @param s
+     */
+    public void setQuestionState(String s){
+        questionState = s;
+    }
+
+    /**
+     * Returns the questionState for the question.
+     * @return
+     */
+    public String getQuestionState(){
+        return questionState;
     }
 }
