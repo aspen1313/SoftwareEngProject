@@ -21,6 +21,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Tests QuestionDetailView
@@ -103,8 +104,10 @@ public class VoteDetailsSubmitTest {
         rule.launchActivity(multiIntent);
         onView(withId(0)).perform(click());
         onView(withId(1)).perform(click());
-        assertEquals(1, (int)Question.getQuestionObject().getResults().get("Option Number 1"));
-        assertEquals(1, (int)Question.getQuestionObject().getResults().get("Option Number 2"));
+        Question q = Question.getQuestionObject();
+        assertNotNull(q);
+        assertEquals(1, (int)q.getResults().get("Option Number 1"));
+        assertEquals(1, (int)q.getResults().get("Option Number 2"));
         rule.finishActivity();
     }
 }
